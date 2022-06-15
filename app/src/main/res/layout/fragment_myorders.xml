@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".fragments.MyOrdersFragment"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:padding="@dimen/fifteen">
+
+    <RelativeLayout
+        android:id="@+id/searchlayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/forty_five">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/five"
+            android:layout_toLeftOf="@+id/filtericon"
+            android:background="@drawable/rectangle_3"
+            android:paddingLeft="@dimen/fifteen"
+            android:paddingRight="@dimen/fifteen" />
+
+        <ImageView
+            android:id="@+id/filtericon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/rectangle_3"
+            android:padding="@dimen/ten"
+            android:src="@drawable/filter_icon" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchlayout"
+        android:layout_marginTop="@dimen/fifteen"
+        app:tabContentStart="20dp"
+        app:tabMode="fixed"
+        app:tabTextAppearance="@style/order_tabstyle">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pending" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Canceled" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Packed" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shipped" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <LinearLayout
+        android:id="@+id/headinglayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/forty"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/fifteen"
+        android:layout_below="@+id/tablayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/date"
+            android:textAppearance="@style/date"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/ordername"
+            android:textAppearance="@style/date"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/paymntmode"
+            android:textAppearance="@style/date"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/amount"
+            android:textAppearance="@style/date"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/action"
+            android:textAppearance="@style/date"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orders_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten"
+        android:layout_below="@+id/headinglayout" />
+
+    <LinearLayout
+        android:id="@+id/changestatus_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/changestatusbtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fifty"
+            android:layout_marginLeft="@dimen/thirty"
+            android:layout_marginTop="@dimen/ten"
+            android:layout_marginRight="@dimen/thirty"
+            android:background="@drawable/change_status_bg"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="@string/changestatus"
+            android:textAppearance="@style/continue_wi" />
+
+        <TextView
+            android:id="@+id/backbtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fifty"
+            android:layout_marginLeft="@dimen/thirty"
+            android:layout_marginTop="@dimen/ten"
+            android:layout_marginRight="@dimen/thirty"
+            android:layout_marginBottom="@dimen/fifteen"
+            android:background="@drawable/manage_prod_bg"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="@string/back"
+            android:textAppearance="@style/continue_wi" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

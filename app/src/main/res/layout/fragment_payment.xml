@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.PaymentFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hundred"
+            android:paddingLeft="@dimen/twenty_two"
+            android:paddingRight="@dimen/twenty_two"
+            android:layout_marginTop="@dimen/fifteen">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/total_walle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_walle"
+                android:gravity="center"
+                android:textAppearance="@style/total_walle" />
+
+                <TextView
+                    android:id="@+id/some_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="@dimen/five"
+                    android:text="@string/some_id"
+                    android:textAppearance="@style/walletprice_id" />
+
+            </LinearLayout>
+
+
+            <TextView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/frame_23"
+                android:layout_width="@dimen/ninety"
+                android:layout_height="@dimen/forty"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textAppearance="@style/add_money"
+                android:text="Add Money"
+                android:background="@drawable/frame_23"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/my_payment_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/twenty_five"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/five"
+            android:text="@string/my_payment_"
+            android:textAppearance="@style/my_payment_"
+            android:gravity="top" />
+
+            <TextView
+                android:id="@+id/today_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/five"
+                android:layout_marginRight="@dimen/twenty_five"
+                android:text="@string/tod"
+                android:textAppearance="@style/today_"
+                android:gravity="top"
+                />
+
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/payment_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fifteen" />
+
+    </LinearLayout>
+
+</FrameLayout>

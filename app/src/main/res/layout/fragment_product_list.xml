@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".fragments.ProductListFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/addnewproductbtn"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/searchlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty_five"
+                    android:layout_marginLeft="@dimen/fifteen"
+                    android:layout_marginTop="@dimen/ten"
+                    android:layout_marginRight="@dimen/fifteen">
+
+                    <EditText
+                        android:id="@+id/searchproduct_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/five"
+                        android:layout_toLeftOf="@+id/filtericon"
+                        android:background="@drawable/rectangle_3"
+                        android:paddingLeft="@dimen/fifteen"
+                        android:paddingRight="@dimen/fifteen" />
+
+                    <ImageView
+                        android:id="@+id/filtericon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rectangle_3"
+                        android:padding="@dimen/ten"
+                        android:src="@drawable/filter_icon" />
+
+                </RelativeLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/fifteen"
+                    android:layout_marginTop="@dimen/ten"
+                    android:layout_marginRight="@dimen/fifteen"
+                    android:elevation="@dimen/three"
+                    app:cardCornerRadius="@dimen/twenty">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/fifteen">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/order_detai"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:elevation="@dimen/five"
+                                android:gravity="top"
+                                android:text="@string/all_product_summery"
+                                android:textAppearance="@style/order_detai" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/twenty"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <View
+                                    android:layout_width="@dimen/ten"
+                                    android:layout_height="@dimen/ten"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:background="@drawable/markers"
+                                    android:backgroundTint="#0A22A2"
+                                    android:elevation="@dimen/five"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:layout_width="@dimen/eighty"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/ten"
+                                    android:elevation="@dimen/five"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/total_produ"
+                                    android:textAppearance="@style/total_order" />
+
+
+                                <TextView
+                                    android:id="@+id/totalproducts"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentTop="true"
+                                    android:elevation="@dimen/five"
+                                    android:gravity="center_vertical"
+                                    android:text="0"
+                                    android:textAppearance="@style/k"
+                                    android:textColor="#000000"
+                                    android:textSize="@dimen/twelve" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/eight"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <View
+                                    android:layout_width="@dimen/ten"
+                                    android:layout_height="@dimen/ten"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:background="@drawable/markers"
+                                    android:backgroundTint="#E72525"
+                                    android:elevation="@dimen/five"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:layout_width="@dimen/eighty"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/ten"
+                                    android:elevation="@dimen/five"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/in_stock"
+                                    android:textAppearance="@style/total_order" />
+
+
+                                <TextView
+                                    android:id="@+id/instockproducts"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentTop="true"
+                                    android:elevation="@dimen/five"
+                                    android:gravity="center_vertical"
+                                    android:text="0"
+                                    android:textColor="#35AB4F"
+                                    android:textSize="@dimen/twelve" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/eight"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <View
+                                    android:layout_width="@dimen/ten"
+                                    android:layout_height="@dimen/ten"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:background="@drawable/markers"
+                                    android:backgroundTint="#35AB4F"
+                                    android:elevation="@dimen/five"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:layout_width="@dimen/eighty"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/ten"
+                                    android:elevation="@dimen/five"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/outof_stock"
+                                    android:textAppearance="@style/total_order" />
+
+
+                                <TextView
+                                    android:id="@+id/outofstockproducts"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentTop="true"
+                                    android:elevation="@dimen/five"
+                                    android:gravity="center_vertical"
+                                    android:text="0"
+                                    android:textColor="#E72525"
+                                    android:textSize="@dimen/twelve" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/hundred_twenty"
+                                android:layout_weight="1"
+                                android:paddingLeft="@dimen/eight"
+                                android:paddingRight="@dimen/eight">
+
+                                <ProgressBar
+                                    android:id="@+id/totalproductprogress"
+                                    style="?android:attr/progressBarStyleHorizontal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_above="@+id/totpro"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginBottom="@dimen/two"
+                                    android:elevation="@dimen/five"
+                                    android:progress="0"
+                                    android:progressDrawable="@drawable/progressbar_bg1" />
+
+                                <TextView
+                                    android:id="@+id/totpro"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginBottom="@dimen/eight"
+                                    android:elevation="@dimen/six"
+                                    android:text="Total\nProducts"
+                                    android:textAppearance="@style/progressbartext" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/hundred_twenty"
+                                android:layout_weight="1"
+                                android:paddingLeft="@dimen/eight"
+                                android:paddingRight="@dimen/eight">
+
+                                <ProgressBar
+                                    android:id="@+id/instockprogress"
+                                    style="?android:attr/progressBarStyleHorizontal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_above="@+id/insto"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginBottom="@dimen/two"
+                                    android:elevation="@dimen/five"
+                                    android:progress="0"
+                                    android:progressDrawable="@drawable/progressbar_bg3" />
+
+                                <TextView
+                                    android:id="@+id/insto"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginBottom="@dimen/eight"
+                                    android:elevation="@dimen/six"
+                                    android:text="In\nStock"
+                                    android:textAppearance="@style/progressbartext" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/hundred_twenty"
+                                android:layout_weight="1"
+                                android:paddingLeft="@dimen/eight"
+                                android:paddingRight="@dimen/eight">
+
+                                <ProgressBar
+                                    android:id="@+id/outofstockprogress"
+                                    style="?android:attr/progressBarStyleHorizontal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_above="@+id/outsto"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginBottom="@dimen/two"
+                                    android:elevation="@dimen/five"
+                                    android:progress="0"
+                                    android:progressDrawable="@drawable/progressbar_bg2" />
+
+                                <TextView
+                                    android:id="@+id/outsto"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginBottom="@dimen/eight"
+                                    android:elevation="@dimen/six"
+                                    android:text="Out Of\nStock"
+                                    android:textAppearance="@style/progressbartext" />
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/twenty">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="@dimen/twenty_five"
+                        android:elevation="@dimen/five"
+                        android:gravity="top"
+                        android:text="@string/all_product"
+                        android:textAppearance="@style/all_product" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/twenty_five"
+                        android:elevation="@dimen/five"
+                        android:gravity="top"
+                        android:text="@string/filter"
+                        android:textAppearance="@style/all_product" />
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/product_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/twenty" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/addnewproductbtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fifty"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/ten"
+            android:layout_marginTop="@dimen/ten"
+            android:layout_marginRight="@dimen/ten"
+            android:layout_marginBottom="@dimen/ten"
+            android:background="@drawable/addnewprod_bg"
+            android:elevation="@dimen/five"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="@string/add_new_pro"
+            android:textAppearance="@style/continue_wi" />
+
+    </RelativeLayout>
+
+</FrameLayout>

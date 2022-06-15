@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/app_bar_dash_board">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fifty">
+
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="@dimen/fifty"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/twelve"
+            android:src="@drawable/menu_icon"
+            app:tint="@color/black" />
+
+
+        <TextView
+            android:id="@+id/pagetitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/three"
+            android:layout_toRightOf="@+id/menu"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/dashboard"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/eighteen" />
+
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="@dimen/fifty"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/fifteen"
+            android:src="@drawable/notification_icon"
+            app:tint="@color/colorAccent" />
+
+    </RelativeLayout>
+
+
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/mobile_navigation" />
+</RelativeLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/addnewprod_bg.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/box.xml" value="0.20102564102564102" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/canceled_order_bg.xml" value="0.10945945945945947" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/change_status_bg.xml" value="0.13243243243243244" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/dialog_box.xml" value="0.1390625" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/drawable_rectangle_1.xml" value="0.1375" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/edit_icon.xml" value="0.13243243243243244" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/frame_23.xml" value="0.125" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/img1.xml" value="0.1375" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/manage_prod_bg.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/markers.xml" value="0.20102564102564102" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/nav_bg_2.xml" value="0.20102564102564102" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/nav_selector_bg.xml" value="0.20364583333333333" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/navheader_bg.xml" value="0.20364583333333333" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/newproductimage_bg.xml" value="0.13243243243243244" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/notification_icon.xml" value="0.20102564102564102" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/order_item_bg.xml" value="0.13541666666666666" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/order_item_selected_bg.xml" value="0.11216216216216217" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/product_home_box.xml" value="0.7878787878787878" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/progressbar_bg.xml" value="0.20102564102564102" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/progressbar_bg2.xml" value="0.20102564102564102" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/progressbar_bg3.xml" value="0.20102564102564102" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/rectangle_3.xml" value="0.1390625" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/drawable/status_bg.xml" value="0.11081081081081082" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/activity_add_new_product.xml" value="0.14" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/activity_dash_board.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/activity_landing.xml" value="0.14" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/activity_login.xml" value="0.12291666666666666" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/activity_register.xml" value="0.12" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/activity_splash_screen.xml" value="0.18" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/app_bar_dash_board.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/canceled_order_layout.xml" value="0.1" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/change_pwd_dialog.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/changestatus_dialog.xml" value="0.11283783783783784" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/content_dash_board.xml" value="0.12" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/forgot_pwd_dialog.xml" value="0.18" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/fragment_gallery.xml" value="0.1875" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/fragment_myaccount.xml" value="0.12" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/fragment_myorders.xml" value="0.1" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/fragment_payment.xml" value="0.11452702702702702" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/fragment_product_list.xml" value="0.12" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/fragment_slideshow.xml" value="0.1875" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/fragment_supplier.xml" value="0.12195945945945946" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/nav_header_dash_board.xml" value="0.1875" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/order_item_layout.xml" value="0.18" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/otp_dialog.xml" value="0.16" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/pendingorder_item_layout.xml" value="0.12195945945945946" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/product_item_layout.xml" value="0.11283783783783784" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/progress_dialog.xml" value="0.1320945945945946" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/spinnerfront2.xml" value="0.12195945945945946" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/spinneritem.xml" value="0.12195945945945946" />
+        <entry key="..\:/Android project/KissanVendor/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.12374581939799331" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/drawable/homebrand_bg.xml" value="0.1285" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_add_new_product.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_dash_board.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_edit_product_details.xml" value="0.21" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_landing.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_login.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_register.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_splash_screen.xml" value="0.13055555555555556" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/app_bar_dash_board.xml" value="0.1" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/canceled_order_layout.xml" value="0.14324324324324325" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/changestatus_dialog.xml" value="0.14324324324324325" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/content_dash_board.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/fragment_home.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/fragment_myaccount.xml" value="0.13055555555555556" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/fragment_myorders.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/fragment_product_list.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/nav_header_dash_board.xml" value="0.13055555555555556" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/pendingorder_item_layout.xml" value="0.21" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/product_item_layout.xml" value="0.18" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/spinnerfront2.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/menu/activity_main_drawer.xml" value="0.14324324324324325" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1285" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/dialog_box"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="@dimen/three_hundred"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/twenty"
+        android:paddingBottom="@dimen/twenty"
+        android:background="@drawable/dialog_box">
+
+        <TextView
+            android:id="@+id/forgot_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginRight="@dimen/twenty"
+            android:text="@string/otp_verific"
+            android:textAppearance="@style/forgot_pass_dial"
+            android:textStyle="bold"
+            android:gravity="top" />
+
+        <TextView
+            android:id="@+id/we_will_hel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/seven"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginRight="@dimen/twenty"
+            android:text="@string/please_ente"
+            android:textAppearance="@style/we_will_hel"
+            android:gravity="top" />
+
+
+        <com.chaos.view.PinView
+            android:id="@+id/pinView"
+            style="@style/PinWidget.PinView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/fifty"
+            android:layout_marginTop="@dimen/twelve"
+            android:cursorVisible="true"
+            android:inputType="number"
+            android:layout_gravity="center"
+            app:cursorColor="@color/colorPrimary"
+            app:itemCount="4"
+            app:itemHeight="@dimen/forty"
+            app:itemSpacing="@dimen/five"
+            app:itemWidth="@dimen/forty"
+            app:viewType="none"
+            android:itemBackground="@drawable/rectangle_3"/>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fifty"
+            android:layout_marginTop="@dimen/twelve"
+            android:background="@drawable/drawable_rectangle_1"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginRight="@dimen/twenty"
+            android:text="@string/submit"
+            android:textAppearance="@style/continue_wi" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fifteen"
+            android:paddingLeft="@dimen/ten"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginRight="@dimen/twenty"
+            android:paddingRight="@dimen/ten">
+
+            <TextView
+                android:id="@+id/back"
+                android:layout_width="35dp"
+                android:layout_height="21dp"
+                android:layout_gravity="center"
+                android:text="@string/back"
+                android:textAppearance="@style/back"
+                android:gravity="top"
+                />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/resendotp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_gravity="center"
+                    android:text="@string/resend_code"
+                    android:textAppearance="@style/back"
+                    android:gravity="top"
+                    />
+
+                <TextView
+                    android:id="@+id/timer_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_gravity="center"
+                    android:text=""
+                    android:textAppearance="@style/timertxt"
+                    android:gravity="top"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

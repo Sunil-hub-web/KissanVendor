@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none"
+    android:isScrollContainer="true"
+    android:background="@color/white"
+    tools:context=".fragments.MyAccountFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hundred_eighty">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hundred_fifty"
+                android:background="@color/colorPrimary"
+                android:paddingLeft="@dimen/thirty"
+                android:paddingRight="@dimen/thirty">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/imagevlay"
+                    android:layout_width="@dimen/eighty"
+                    android:layout_height="@dimen/eighty"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    app:cardCornerRadius="@dimen/fifty">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/homebrand_bg">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profile_image"
+                            android:layout_width="@dimen/eighty"
+                            android:layout_height="@dimen/eighty"
+                            android:src="@drawable/finallogo"/>
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/fifteen"
+                    android:layout_toRightOf="@+id/imagevlay"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/username_heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="@string/nav_header_title"
+                        android:textAppearance="@style/nakul_kumar" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="@string/user_type_v"
+                        android:textAppearance="@style/user_type_v" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/sixty"
+                android:layout_height="@dimen/sixty"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/fifteen"
+                app:cardCornerRadius="@dimen/thirty">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/nav_header_desc"
+                        android:padding="@dimen/fifteen"
+                        app:tint="@color/colorPrimary"
+                        app:srcCompat="@drawable/edit_icon" />
+
+                    <ImageView
+                        android:id="@+id/save_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/nav_header_desc"
+                        android:padding="@dimen/fifteen"
+                        app:tint="@color/colorPrimary"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/proff_save_btn" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/forty">
+
+            <TextView
+                android:id="@+id/my_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_marginLeft="@dimen/twenty"
+                android:gravity="top"
+                android:text="@string/my_details"
+                android:textAppearance="@style/my_details" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/one"
+                android:background="#7D353535"
+                android:layout_toRightOf="@+id/my_details"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/ten"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/personal_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/ten"
+            android:text="@string/personal_in"
+            android:textAppearance="@style/personal_in"
+            android:gravity="top"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginTop="@dimen/ten"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/name"
+            android:textAppearance="@style/name"
+            android:gravity="top" />
+        <EditText
+            android:id="@+id/name_ed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/forty"
+            android:layout_marginTop="@dimen/four"
+            android:background="@drawable/rectangle_3"
+            android:fontFamily="@font/raleway"
+            android:paddingLeft="@dimen/fifteen"
+            android:paddingRight="@dimen/fifteen"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:inputType="textPersonName"
+            android:enabled="false"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginRight="@dimen/twenty"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_marginTop="@dimen/five"
+            android:text="@string/mobile"
+            android:textAppearance="@style/name"
+            android:gravity="top" />
+        <EditText
+            android:id="@+id/mobilenumber_ed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/forty"
+            android:layout_marginTop="@dimen/four"
+            android:background="@drawable/rectangle_3"
+            android:paddingLeft="@dimen/fifteen"
+            android:fontFamily="@font/raleway"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:enabled="true"
+            android:paddingRight="@dimen/fifteen"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginRight="@dimen/twenty"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginTop="@dimen/five"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/e_mail"
+            android:textAppearance="@style/name"
+            android:gravity="top" />
+        <EditText
+            android:id="@+id/email_ed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/forty"
+            android:layout_marginTop="@dimen/four"
+            android:background="@drawable/rectangle_3"
+            android:paddingLeft="@dimen/fifteen"
+            android:inputType="textEmailAddress"
+            android:enabled="false"
+            android:paddingRight="@dimen/fifteen"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginRight="@dimen/twenty"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/fifteen"
+            android:text="@string/account_det"
+            android:textAppearance="@style/personal_in"
+            android:gravity="top"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginTop="@dimen/ten"
+            android:text="@string/bank_name"
+            android:textAppearance="@style/name"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="top" />
+        <EditText
+            android:id="@+id/bankname_ed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/forty"
+            android:layout_marginTop="@dimen/four"
+            android:background="@drawable/rectangle_3"
+            android:paddingLeft="@dimen/fifteen"
+            android:enabled="false"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:fontFamily="@font/raleway"
+            android:paddingRight="@dimen/fifteen"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginRight="@dimen/twenty"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginRight="@dimen/three">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:text="@string/account_no"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textAppearance="@style/name"
+                    android:gravity="top" />
+                <EditText
+                    android:id="@+id/accountnumber_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginTop="@dimen/four"
+                    android:background="@drawable/rectangle_3"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:enabled="false"
+                    android:paddingRight="@dimen/fifteen"
+                    android:inputType="number"
+                    android:fontFamily="@font/raleway"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginRight="@dimen/three"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/three"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/ifsc"
+                    android:textAppearance="@style/name"
+                    android:gravity="top" />
+                <EditText
+                    android:id="@+id/ifsccode_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginTop="@dimen/four"
+                    android:enabled="false"
+                    android:background="@drawable/rectangle_3"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:fontFamily="@font/raleway"
+                    android:paddingRight="@dimen/fifteen"
+                    android:layout_marginLeft="@dimen/three"
+                    android:layout_marginRight="@dimen/twenty"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/fifteen"
+            android:text="@string/location_details"
+            android:textAppearance="@style/personal_in"
+            android:gravity="top"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginRight="@dimen/three">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:text="@string/state"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textAppearance="@style/name"
+                    android:gravity="top" />
+                <EditText
+                    android:id="@+id/state_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginTop="@dimen/four"
+                    android:enabled="false"
+                    android:background="@drawable/rectangle_3"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:fontFamily="@font/raleway"
+                    android:paddingRight="@dimen/fifteen"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginRight="@dimen/three"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/three"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:text="@string/city"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textAppearance="@style/name"
+                    android:gravity="top" />
+                <EditText
+                    android:id="@+id/city_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginTop="@dimen/four"
+                    android:enabled="false"
+                    android:background="@drawable/rectangle_3"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:fontFamily="@font/raleway"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:paddingRight="@dimen/fifteen"
+                    android:layout_marginLeft="@dimen/three"
+                    android:layout_marginRight="@dimen/twenty"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/twenty_five">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginRight="@dimen/three">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="top"
+                    android:text="@string/street"
+                    android:textAppearance="@style/name" />
+                <EditText
+                    android:id="@+id/street_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginTop="@dimen/four"
+                    android:enabled="false"
+                    android:background="@drawable/rectangle_3"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:fontFamily="@font/raleway"
+                    android:paddingRight="@dimen/fifteen"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginRight="@dimen/three"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/three"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:text="@string/zipcode"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textAppearance="@style/name"
+                    android:gravity="top" />
+                <EditText
+                    android:id="@+id/zipcode_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginTop="@dimen/four"
+                    android:enabled="false"
+                    android:background="@drawable/rectangle_3"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:paddingRight="@dimen/fifteen"
+                    android:fontFamily="@font/raleway"
+                    android:layout_marginLeft="@dimen/three"
+                    android:layout_marginRight="@dimen/twenty"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

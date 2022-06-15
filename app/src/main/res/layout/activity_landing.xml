@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".activities.LandingActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/landingpage_image"
+        android:layout_margin="@dimen/forty"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.8">
+
+        <TextView
+            android:id="@+id/register_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/thirty"
+            android:gravity="top"
+            android:textStyle="bold"
+            android:text="@string/register_no"
+            android:textAppearance="@style/register_no" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/register_no"
+            android:layout_above="@+id/i_already_h"
+            android:padding="@dimen/twenty">
+
+            <Button
+                android:id="@+id/login_btn"
+                android:layout_width="@dimen/three_hundred"
+                android:layout_height="@dimen/fifty"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/drawable_rectangle_1"
+                android:text="@string/continue_wi"
+                android:textAppearance="@style/continue_wi" />
+
+
+            <TextView
+                android:id="@+id/or"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="top"
+                android:text="@string/or"
+                android:textAppearance="@style/or" />
+
+
+            <RelativeLayout
+                android:id="@+id/sociallayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/sixty"
+                android:layout_marginRight="@dimen/sixty">
+
+                <ImageView
+                    android:id="@+id/image_1"
+                    android:layout_width="@dimen/sixty"
+                    android:layout_height="@dimen/sixty"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/google_icon" />
+
+
+                <ImageView
+                    android:id="@+id/image_2"
+                    android:layout_width="@dimen/forty_five"
+                    android:layout_height="@dimen/forty_five"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/facebook_icon"
+                    />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/i_already_h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/thirty"
+            android:gravity="top"
+            android:text="@string/i_already_h"
+            android:textAppearance="@style/i_already_h" />
+
+    </RelativeLayout>
+
+</LinearLayout>

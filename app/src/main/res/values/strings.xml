@@ -1,0 +1,128 @@
+<resources>
+    <string name="app_name">Kissan Vendor</string>
+    <string name="register_no">Register\nNow</string>
+    <string name="i_already_h">I already have an account ? Log In</string>
+    <string name="continue_wi">Continue with e-mail</string>
+    <string name="or">OR</string>
+    <string name="welcome_bac">Welcome\nBack</string>
+    <string name="e_mail_mobi">Mobile Number</string>
+    <string name="password">Password</string>
+    <string name="forgot_pass">Forgot password ?</string>
+    <string name="log_in">Log In</string>
+    <string name="we_will_hel">we will help you recover the password</string>
+    <string name="submit">Submit</string>
+    <string name="back">Back</string>
+    <string name="otp_verific">OTP Verification</string>
+    <string name="please_ente">Please enter the OTP verification code</string>
+    <string name="resend_code">Resend OTP</string>
+    <string name="change_pass">Change Password</string>
+    <string name="please_enter_new_password">Please enter your new password </string>
+    <string name="new_passwor">New Password</string>
+    <string name="retype_pass">Retype Password</string>
+    <string name="create_new_">Create New\nAccount</string>
+    <string name="full_name">Full Name</string>
+    <string name="mobile_numb">Mobile Number</string>
+    <string name="e_mail">E-mail</string>
+    <string name="create_pass">Create Password</string>
+    <string name="confirm_pas">Confirm Password</string>
+    <string name="create_my_a">Create My Account</string>
+    <string name="title_activity_dash_board">DashBoard</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="supplier">Supplier</string>
+    <string name="orders">Orders</string>
+    <string name="product_lis">Product Listing</string>
+    <string name="payment_his">Payment History</string>
+    <string name="my_account">My Account</string>
+    <string name="log_out">Log Out</string>
+    <string name="order_detai">Order Details</string>
+    <string name="total_order">Total Order</string>
+    <string name="pending_order">Pending</string>
+    <string name="dispatch_order">Dispatch</string>
+    <string name="product">Product</string>
+    <string name="total_produ">Total Product</string>
+    <string name="in_stock">In Stock</string>
+    <string name="outof_stock">Out Of Stock</string>
+    <string name="hold">Hold</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_new_pro">Add New Product</string>
+    <string name="manage_pro">Manage Product</string>
+    <!--    Myaccount-->
+    <string name="user_type_v">User Type - Vendor</string>
+    <string name="my_details">My Details</string>
+    <string name="personal_in">Personal Info</string>
+    <string name="name">Name</string>
+    <string name="mobile">Mobile</string>
+    <string name="account_det">Account Details</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="account_no">Account Number</string>
+    <string name="ifsc">IFSC Code</string>
+    <string name="location_details">Location Details</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="street">Street</string>
+    <string name="zipcode">Zip Code</string>
+
+    <!--    Orders-->
+    <string name="date">Date</string>
+    <string name="ordername">Name</string>
+    <string name="orderid">Order Id</string>
+    <string name="paymntmode">Payment\nMode</string>
+    <string name="amount">Amount</string>
+    <string name="action">Action</string>
+    <string name="productname">Product Name</string>
+    <string name="status">Status</string>
+    <string name="prodqty">Product Qty</string>
+    <string name="paymode">Payment Mode</string>
+    <string name="deliverto">Deliver To</string>
+    <string name="contact">Contact</string>
+    <string name="changestatus">Change Status</string>
+    <string name="dummytext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim arcu dictum ornare adipiscing lorem aliquam placerat enim. Diam a, sed lectus hendrerit egestas facilisis. Quam.</string>
+
+    <!--    productlist-->
+    <string name="all_product_summery">All Product Summery</string>
+    <string name="total_product">Total Product</string>
+    <string name="all_product">All Products</string>
+    <string name="filter">Filter</string>
+
+    <!--    addnewproduct-->
+    <string name="addproduct">Add Product</string>
+    <string name="product_name">Product Name</string>
+    <string name="producttype">Product Type</string>
+    <string name="categories">Categories</string>
+    <string name="subcategories">Sub-Categories</string>
+    <string name="Stock">Stock</string>
+    <string name="prodweight">Prod Weight</string>
+    <string name="discount">Discount</string>
+    <string name="retailprice">Retail Price</string>
+    <string name="gst">GST</string>
+    <string name="description">Description</string>
+    <string name="uloadimage">Upload\nImage</string>
+
+
+    <!--    payment-->
+    <string name="total_walle">Total Wallet Balance</string>
+    <string name="some_id">₹ 50,00.00</string>
+    <string name="my_payment_">My payment History</string>
+    <string name="tod">Today</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Nakul Kumar</string>
+    <string name="nav_header_subtitle">Bangalore, India</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+    <string name="facebook_app_id">405061954884005</string>
+    <string name="fb_login_protocol_scheme">fb405061954884005</string>
+    <string name="facebook_client_token">e6157fdce2f63b811e3453aea8e5a1b6</string>
+
+</resources>

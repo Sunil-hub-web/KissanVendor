@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_box"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="@dimen/three_hundred"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/dialog_box"
+        android:padding="@dimen/twenty">
+
+        <TextView
+            android:id="@+id/forgot_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/changestatus"
+            android:textAppearance="@style/forgot_pass_dial"
+            android:textStyle="bold"
+            android:gravity="top" />
+
+        <Spinner
+            android:id="@+id/spinner_Status"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fifty"
+            android:layout_marginTop="@dimen/twenty"
+            android:paddingLeft="@dimen/fifteen"
+            android:paddingRight="@dimen/fifteen"
+            android:gravity="center_vertical"
+            android:background="@drawable/rectangle_3"
+            android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
+            android:textAppearance="@style/back"
+            android:text="Pending"/>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fifty"
+            android:layout_marginTop="@dimen/twelve"
+            android:background="@drawable/drawable_rectangle_1"
+            android:text="@string/submit"
+            android:textAppearance="@style/continue_wi" />
+
+
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="35dp"
+            android:layout_height="21dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/fifteen"
+            android:text="@string/back"
+            android:textAppearance="@style/back"
+            android:gravity="top"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
