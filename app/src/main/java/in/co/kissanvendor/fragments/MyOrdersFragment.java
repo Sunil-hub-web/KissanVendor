@@ -821,6 +821,12 @@ public class MyOrdersFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 statues = spinner_Status.getSelectedItem().toString();
+
+                if(statues.equals("shipped")){
+
+                    statues = "shiped";
+                }
+
                 Toast.makeText(getActivity(), statues, Toast.LENGTH_SHORT).show();
             }
 

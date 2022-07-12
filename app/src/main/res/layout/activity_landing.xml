@@ -66,24 +66,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="@dimen/sixty"
-                android:layout_marginRight="@dimen/sixty">
+                android:layout_marginLeft="@dimen/hundred"
+                android:layout_marginRight="@dimen/hundred">
 
                 <ImageView
                     android:id="@+id/image_1"
-                    android:layout_width="@dimen/sixty"
-                    android:layout_height="@dimen/sixty"
+                    android:layout_width="@dimen/forty"
+                    android:layout_height="@dimen/forty"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/google_icon" />
+                    android:src="@drawable/google" />
 
 
                 <ImageView
                     android:id="@+id/image_2"
-                    android:layout_width="@dimen/forty_five"
-                    android:layout_height="@dimen/forty_five"
+                    android:layout_width="@dimen/forty"
+                    android:layout_height="@dimen/forty"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/facebook_icon"
-                    />
+                    android:src="@drawable/facebook" />
 
             </RelativeLayout>
 

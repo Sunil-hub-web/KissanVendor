@@ -72,9 +72,6 @@ public class LandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        //AppEventsLogger.activateApp((Application) getApplicationContext());
-
         getSupportActionBar().hide();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -91,6 +88,10 @@ public class LandingActivity extends AppCompatActivity {
 
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        //AppEventsLogger.activateApp((Application) getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
 
         InIt();
 
@@ -124,7 +125,9 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                LoginManager.getInstance().logInWithReadPermissions(LandingActivity.this, Arrays.asList("email", "public_profile"));
+                //LoginManager.getInstance().logInWithReadPermissions(LandingActivity.this, Arrays.asList(, "public_profile"));
+
+                LoginManager.getInstance().logInWithReadPermissions(LandingActivity.this, Arrays.asList("email","public_profile"));
 
                 LoginManager.getInstance().registerCallback(callbackManager,
                         new FacebookCallback<LoginResult>() {
@@ -140,6 +143,8 @@ public class LandingActivity extends AppCompatActivity {
                                     Profile profile = Profile.getCurrentProfile();
                                     String id = profile.getName();
                                     setFacebookData(loginResult);
+
+                                    Toast.makeText(LandingActivity.this, id, Toast.LENGTH_SHORT).show();
 
                                 } else {
 
@@ -217,6 +222,8 @@ public class LandingActivity extends AppCompatActivity {
 
                             //String token = sessionManager.getUserToken();
                             //userSociallogin(email,token);
+
+                            SocialLogin(firstName,email);
 
                             Toast.makeText(LandingActivity.this, email, Toast.LENGTH_SHORT).show();
 
@@ -328,6 +335,8 @@ public class LandingActivity extends AppCompatActivity {
                         String msg = response.getString("msg");
 
                         session.setToken(token);
+
+                        session.setLogin();
 
                         Intent intent = new Intent(LandingActivity.this,DashBoard.class);
                         startActivity(intent);

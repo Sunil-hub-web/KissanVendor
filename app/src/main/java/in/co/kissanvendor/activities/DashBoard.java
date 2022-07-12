@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -31,6 +32,11 @@ import in.co.kissanvendor.fragments.PaymentFragment;
 import in.co.kissanvendor.fragments.ProductListFragment;
 import in.co.kissanvendor.fragments.SupplierFragment;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -43,7 +49,8 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     ImageView menu, search_icon;
     private Boolean exit = false;
     SessionManager session;
-    public static TextView pagetitle, dashboard, supplier, orders, productlisting, paymenthistory, myaccount, logout, username, userlocation,text_Close;
+    GoogleSignInClient mGoogleSignInClient;
+    public static TextView pagetitle, dashboard, supplier, orders, productlisting, paymenthistory, myaccount, logout, username, userlocation, text_Close;
     public static View dashboardview, supplierview, ordersview, productlistingview, paymenthistoryview, myaccountview;
 
     @Override
@@ -53,7 +60,16 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         session = new SessionManager(this);
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
         InIt();
+
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +80,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    public void InIt(){
+    public void InIt() {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
@@ -119,9 +135,9 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         HomeFragment test = (HomeFragment) getSupportFragmentManager().findFragmentByTag("HomeFragment");
 
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }else {
+        } else {
             if (exit) {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
@@ -239,25 +255,26 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
             case R.id.logout:
 
-                    final CharSequence[] items = {"Yes", "Cancel"};
+                final CharSequence[] items = {"Yes", "Cancel"};
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(DashBoard.this);
-                    builder.setTitle("Are you sure,\nyou want to LOGOUT ?");
-                    builder.setItems(items, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int item) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(DashBoard.this);
+                builder.setTitle("Are you sure,\nyou want to LOGOUT ?");
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
 
-                            if (items[item].equals("Yes")) {
+                        if (items[item].equals("Yes")) {
 
-                                dialog.dismiss();
-                                session.logoutUser();
+                            dialog.dismiss();
+                            session.logoutUser();
+                            signOut();
 
-                            } else if (items[item].equals("Cancel")) {
-                                dialog.dismiss();
-                            }
+                        } else if (items[item].equals("Cancel")) {
+                            dialog.dismiss();
                         }
-                    });
-                    builder.show();
+                    }
+                });
+                builder.show();
 
                 break;
 
@@ -275,7 +292,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    public void setDefault(){
+    public void setDefault() {
 
         dashboardview.setVisibility(View.GONE);
         supplierview.setVisibility(View.GONE);
@@ -293,4 +310,16 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
     }
 
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        Toast.makeText(DashBoard.this, "Your Account Logout", Toast.LENGTH_SHORT).show();
+                        // ...
+                    }
+                });
+
+    }
 }
