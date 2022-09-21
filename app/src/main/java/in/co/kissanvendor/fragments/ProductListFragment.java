@@ -33,6 +33,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -182,19 +183,21 @@ public class ProductListFragment extends Fragment {
                                     String subcategoryId = jsobjectitem.getString("subcategoryId");
                                     String totalRating = jsobjectitem.getString("totalRating");
                                     String avgRating = jsobjectitem.getString("avgRating");
+                                    String product_commision = jsobjectitem.getString("product_commision");
                                     String sold = jsobjectitem.getString("sold");
                                     String _id = jsobjectitem.getString("_id");
                                     String addedBy = jsobjectitem.getString("addedBy");
                                     String title = jsobjectitem.getString("title");
-                                    String price = jsobjectitem.getString("price");
+                                    Double price = jsobjectitem.getDouble("price");
                                     String type = jsobjectitem.getString("type");
                                     String description = jsobjectitem.getString("description");
                                     String soldBy = jsobjectitem.getString("soldBy");
                                     String inStock = jsobjectitem.getString("inStock");
-                                    String experience = jsobjectitem.getString("experience");
+                                    String isRefundable = jsobjectitem.getString("isRefundable");
                                     String categoryId = jsobjectitem.getString("categoryId");
                                     String createdAt = jsobjectitem.getString("createdAt");
                                     String updatedAt = jsobjectitem.getString("updatedAt");
+
 
                                     productimagearray = new ArrayList<ProductImageGetSet>();
                                     JSONArray imagesarr = jsobjectitem.getJSONArray("images");
@@ -215,8 +218,12 @@ public class ProductListFragment extends Fragment {
 
                                     }
 
+                                    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+                                    float pricetot1 = Float.valueOf(decimalFormat.format(price));
+                                    String pricetot12 = String.valueOf(pricetot1);
+
                                     productarray.add(new ProductGetSet(discount, subcategoryId, totalRating, avgRating, sold, _id, addedBy,
-                                            title, price, type, description, soldBy, inStock, experience, categoryId, createdAt, updatedAt, productimagearray,weightArray));
+                                            title, pricetot12, type, description, soldBy, inStock, isRefundable, categoryId, createdAt, updatedAt, productimagearray,weightArray));
 
                                 }
 

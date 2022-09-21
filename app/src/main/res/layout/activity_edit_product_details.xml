@@ -48,7 +48,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_EditProduct"
+        android:layout_above="@+id/addnewproductbtn"
         android:layout_below="@+id/header"
         android:scrollbars="none">
 
@@ -79,6 +79,97 @@
                 android:paddingLeft="@dimen/fifteen"
                 android:paddingRight="@dimen/fifteen" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/ten"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="top"
+                android:text="@string/supercategory"
+                android:textAppearance="@style/product_nam" />
+
+            <Spinner
+                android:id="@+id/supercategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/forty"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/four"
+                android:layout_marginRight="@dimen/ten"
+                android:background="@drawable/rectangle_3"
+                android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
+                android:paddingLeft="@dimen/fifteen"
+                android:paddingRight="@dimen/five" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/three"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/twenty"
+                        android:layout_marginTop="@dimen/ten"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="top"
+                        android:text="@string/categories"
+                        android:textAppearance="@style/product_nam" />
+
+                    <Spinner
+                        android:id="@+id/categories_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginLeft="@dimen/twenty"
+                        android:layout_marginTop="@dimen/four"
+                        android:layout_marginRight="@dimen/three"
+                        android:background="@drawable/rectangle_3"
+                        android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
+                        android:paddingLeft="@dimen/fifteen"
+                        android:paddingRight="@dimen/five" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/three"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/five"
+                        android:layout_marginTop="@dimen/ten"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="top"
+                        android:text="@string/subcategories"
+                        android:textAppearance="@style/product_nam" />
+
+                    <Spinner
+                        android:id="@+id/subcategory_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginLeft="@dimen/three"
+                        android:layout_marginTop="@dimen/four"
+                        android:layout_marginRight="@dimen/twenty"
+                        android:background="@drawable/rectangle_3"
+                        android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
+                        android:paddingLeft="@dimen/fifteen"
+                        android:paddingRight="@dimen/five" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,6 +198,35 @@
                         android:layout_height="@dimen/forty"
                         android:layout_marginLeft="@dimen/twenty"
                         android:layout_marginTop="@dimen/four"
+                        android:layout_marginRight="@dimen/ten"
+                        android:background="@drawable/rectangle_3"
+                        android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
+                        android:paddingLeft="@dimen/fifteen"
+                        android:paddingRight="@dimen/five" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/three"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten"
+                        android:layout_marginTop="@dimen/ten"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="top"
+                        android:text="@string/producttype"
+                        android:textAppearance="@style/product_nam" />
+
+                    <Spinner
+                        android:id="@+id/prodty1_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginTop="@dimen/four"
                         android:layout_marginRight="@dimen/twenty"
                         android:background="@drawable/rectangle_3"
                         android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
@@ -116,6 +236,101 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/three"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/twenty"
+                        android:layout_marginTop="@dimen/ten"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="top"
+                        android:text="@string/dimention"
+                        android:textAppearance="@style/product_nam" />
+
+                    <EditText
+                        android:id="@+id/dimention"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginLeft="@dimen/twenty"
+                        android:layout_marginTop="@dimen/four"
+                        android:background="@drawable/rectangle_3"
+                        android:paddingLeft="@dimen/fifteen"
+                        android:paddingRight="@dimen/fifteen" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/three"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/five"
+                        android:layout_marginTop="@dimen/ten"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="top"
+                        android:text="@string/color"
+                        android:textAppearance="@style/product_nam" />
+
+                    <EditText
+                        android:id="@+id/color"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginLeft="@dimen/three"
+                        android:layout_marginTop="@dimen/four"
+                        android:layout_marginRight="@dimen/five"
+                        android:background="@drawable/rectangle_3"
+                        android:paddingLeft="@dimen/fifteen"
+                        android:paddingRight="@dimen/fifteen" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/five"
+                        android:layout_marginTop="@dimen/ten"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="top"
+                        android:text="@string/quentity"
+                        android:textAppearance="@style/product_nam" />
+
+                    <EditText
+                        android:id="@+id/quentity"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginTop="@dimen/four"
+                        android:layout_marginRight="@dimen/twenty"
+                        android:background="@drawable/rectangle_3"
+                        android:paddingLeft="@dimen/fifteen"
+                        android:paddingRight="@dimen/fifteen" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -203,16 +418,15 @@
                         android:layout_marginTop="@dimen/ten"
                         android:fontFamily="@font/poppins_bold"
                         android:gravity="top"
-                        android:text="@string/discount"
+                        android:text="@string/retailprice"
                         android:textAppearance="@style/product_nam" />
 
                     <EditText
-                        android:id="@+id/discount"
+                        android:id="@+id/retailprice"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/forty"
                         android:layout_marginLeft="@dimen/twenty"
                         android:layout_marginTop="@dimen/four"
-                        android:layout_marginRight="@dimen/three"
                         android:background="@drawable/rectangle_3"
                         android:paddingLeft="@dimen/fifteen"
                         android:paddingRight="@dimen/fifteen" />
@@ -233,16 +447,16 @@
                         android:layout_marginTop="@dimen/ten"
                         android:fontFamily="@font/poppins_bold"
                         android:gravity="top"
-                        android:text="@string/retailprice"
+                        android:text="@string/discount"
                         android:textAppearance="@style/product_nam" />
 
                     <EditText
-                        android:id="@+id/retailprice"
+                        android:id="@+id/discount"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/forty"
                         android:layout_marginLeft="@dimen/three"
                         android:layout_marginTop="@dimen/four"
-                        android:layout_marginRight="@dimen/twenty"
+                        android:layout_marginRight="@dimen/five"
                         android:background="@drawable/rectangle_3"
                         android:paddingLeft="@dimen/fifteen"
                         android:paddingRight="@dimen/fifteen" />
@@ -253,8 +467,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -270,14 +483,129 @@
                         android:id="@+id/gst"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/forty"
-                        android:layout_marginLeft="@dimen/three"
                         android:layout_marginTop="@dimen/four"
                         android:layout_marginRight="@dimen/twenty"
                         android:background="@drawable/rectangle_3"
                         android:paddingLeft="@dimen/fifteen"
+                        android:text="18"
+                        android:enabled="false"
                         android:paddingRight="@dimen/fifteen" />
 
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/three"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/twenty"
+                        android:layout_marginTop="@dimen/ten"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="top"
+                        android:text="@string/servicecharges"
+                        android:textAppearance="@style/product_nam" />
+
+                    <EditText
+                        android:id="@+id/servicecharges"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginLeft="@dimen/twenty"
+                        android:layout_marginTop="@dimen/four"
+                        android:background="@drawable/rectangle_3"
+                        android:paddingLeft="@dimen/fifteen"
+                        android:text="1"
+                        android:enabled="false"
+                        android:paddingRight="@dimen/fifteen" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/three"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/five"
+                        android:layout_marginTop="@dimen/ten"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="top"
+                        android:text="@string/commission"
+                        android:textAppearance="@style/product_nam" />
+
+                    <EditText
+                        android:id="@+id/commission"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginLeft="@dimen/three"
+                        android:layout_marginTop="@dimen/four"
+                        android:layout_marginRight="@dimen/ten"
+                        android:background="@drawable/rectangle_3"
+                        android:paddingLeft="@dimen/fifteen"
+                        android:text="5"
+                        android:enabled="false"
+                        android:paddingRight="@dimen/fifteen" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/ten"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="top"
+                android:text="@string/totalpayment"
+                android:textAppearance="@style/product_nam" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/totalpayment"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.3"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/four"
+                    android:layout_marginRight="@dimen/twenty"
+                    android:background="@drawable/rectangle_3"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:paddingRight="@dimen/fifteen"
+                    android:enabled="false"/>
+
+                <TextView
+                    android:id="@+id/priceClc"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="@dimen/forty"
+                    android:background="@drawable/addnewprod_bg"
+                    android:elevation="@dimen/five"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="Total Price"
+                    android:textSize="@dimen/thirteen"
+                    android:textAppearance="@style/continue_wi" />
 
             </LinearLayout>
 
@@ -334,9 +662,9 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/hundred"
                     android:layout_height="@dimen/hundred"
+                    android:elevation="@dimen/three"
                     android:layout_marginLeft="@dimen/ten"
                     android:layout_marginRight="@dimen/ten"
-                    android:elevation="@dimen/three"
                     app:cardCornerRadius="@dimen/eight">
 
                     <LinearLayout

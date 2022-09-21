@@ -1,6 +1,8 @@
 package in.co.kissanvendor.models;
 
-public class ProductImageGetSet {
+import java.io.Serializable;
+
+public class ProductImageGetSet implements Serializable {
 
     String imageurl;
 
@@ -15,5 +17,12 @@ public class ProductImageGetSet {
     public ProductImageGetSet setImageurl(String imageurl) {
         this.imageurl = imageurl;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductImageGetSet{" +
+                "imageurl='" + imageurl + '\'' +
+                '}';
     }
 }

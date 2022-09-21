@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/imagelay"
             android:layout_width="@dimen/sixty"
@@ -33,13 +32,15 @@
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
+            android:id="@+id/lin_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/fifteen"
             android:layout_toRightOf="@+id/imagelay"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_toLeftOf="@+id/lin_1">
 
             <TextView
                 android:id="@+id/productname"
@@ -59,22 +60,26 @@
 
         </LinearLayout>
 
-
         <LinearLayout
+            android:id="@+id/lin_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/five"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/five">
+                android:layout_margin="@dimen/five"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
 
                 <RelativeLayout
                     android:id="@+id/img_Edit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content">
 
                     <ImageView
@@ -86,13 +91,12 @@
 
                 </RelativeLayout>
 
-
                 <RelativeLayout
                     android:id="@+id/img_Delete"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/fifteen"
-                    android:layout_toRightOf="@id/img_Edit">
+                    android:layout_marginLeft="@dimen/twenty_five">
 
                     <ImageView
                         android:layout_width="@dimen/fifteen"
@@ -104,14 +108,14 @@
 
                 </RelativeLayout>
 
-            </RelativeLayout>
+
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/five">
+                android:layout_margin="@dimen/five"
+                android:orientation="vertical">
 
                 <!-- <TextView
                     android:id="@+id/price"
@@ -123,25 +127,26 @@
 
                 <TextView
                     android:id="@+id/price"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Dai"
+                    android:text="15000000"
                     android:textAppearance="@style/productprice" />
 
                 <TextView
                     android:id="@+id/discount"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Dairy"
-                    android:layout_marginLeft="@dimen/fifteen"
+                    android:text="150000"
                     android:textAppearance="@style/productdiscount" />
 
             </LinearLayout>
 
 
+
         </LinearLayout>
+
 
     </RelativeLayout>
 

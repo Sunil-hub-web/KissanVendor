@@ -91,12 +91,19 @@
     <string name="categories">Categories</string>
     <string name="subcategories">Sub-Categories</string>
     <string name="Stock">Stock</string>
-    <string name="prodweight">Prod Weight</string>
+    <string name="prodweight">Product Weight</string>
     <string name="discount">Discount</string>
     <string name="retailprice">Retail Price</string>
     <string name="gst">GST</string>
     <string name="description">Description</string>
     <string name="uloadimage">Upload\nImage</string>
+    <string name="servicecharges">Service Charge</string>
+    <string name="commission">Commission</string>
+    <string name="totalpayment">Total Payment</string>
+    <string name="supercategory">Super Category</string>
+    <string name="dimention">Dimention</string>
+    <string name="color">Color</string>
+    <string name="quentity">Quentity</string>
 
 
     <!--    payment-->

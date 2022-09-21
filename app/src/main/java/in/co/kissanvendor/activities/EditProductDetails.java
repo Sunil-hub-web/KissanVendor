@@ -9,13 +9,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -32,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -46,6 +45,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,11 +67,13 @@ import retrofit2.Callback;
 
 public class EditProductDetails extends AppCompatActivity {
 
-    EditText productname, stock, weight, discount, retailprice, description;
+    EditText productname, stock, weight, discount, retailprice, gst, description,servicecharges,
+            commission,totalpayment;
     String str_productname,str_description;
-    int str_stock = 0,  str_retailprice = 0, str_discount = 0, str_weight = 0;
-    Spinner prodty_spinner;
-    TextView btn_EditProduct;
+    float str_stock = 0.0F, str_discount = 0.0F, str_weight = 0.0F,str_retailprice = 0.0F,pricetot;
+    Spinner categories_spinner, producttype_spinner, prodty_spinner, prodty1_spinner, supercategory,
+            subcategory_spinner;
+    TextView btn_EditProduct,priceClc;
     ArrayList<String> ImageArray = new ArrayList<>();
     ArrayList<ProductImageGetSet> getProductimagearray = new ArrayList<>();
     ArrayList<String> ProducttypeArray = new ArrayList<>();
@@ -84,12 +86,29 @@ public class EditProductDetails extends AppCompatActivity {
     boolean photoselected = false;
     SessionManager session;
     ViewDialog progressbar;
-    String typename = "", typeid = "",productId = "", photostr1 = "", photostr2 = "", photostr3 = "",
+    String typename = "", typeid = "",productId = "", photostr1 = "", photostr2 = "", photostr3 = "",product = "",
             photoselection = "", categoryId = "", experience = "",soldBy = "",token = "",title = "",price = "",
-            type = "",discount1 = "",description1 = "",weight1 = "",inStock = "";
+            type = "",discount1 = "",description1 = "",weight1 = "",inStock = "",SubcategoryId = "",product_type = "";
     SessionManager sessionManager;
+    ArrayList<ProductImageGetSet> filelist;
 
     JSONArray imagejson = new JSONArray();
+
+    ArrayList<String> typeArray1;
+    Map<String,String> type_Array;
+
+    ArrayList<String> superCategoryList;
+    HashMap<String, String> super_CategoryList;
+
+    ArrayList<String> categoryList;
+    HashMap<String, String> category_List;
+
+    ArrayList<String> subcCategoryList = new ArrayList<>();
+    HashMap<String, String> subCategory_List = new HashMap<>();
+
+    JSONObject jsonObject_metadata;
+
+    boolean bool_productType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +126,14 @@ public class EditProductDetails extends AppCompatActivity {
         productimage1 = findViewById(R.id.productimage1);
         productimage2 = findViewById(R.id.productimage2);
         productimage3 = findViewById(R.id.productimage3);
+        totalpayment = findViewById(R.id.totalpayment);
+        prodty1_spinner = findViewById(R.id.prodty1_spinner);
+        supercategory = findViewById(R.id.supercategory);
+        subcategory_spinner = findViewById(R.id.subcategory_spinner);
+        gst = findViewById(R.id.gst);
+        priceClc = findViewById(R.id.priceClc);
+        servicecharges = findViewById(R.id.servicecharges);
+        commission = findViewById(R.id.commission);
 
         getSupportActionBar().hide();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -118,6 +145,7 @@ public class EditProductDetails extends AppCompatActivity {
 
         productId = getIntent().getStringExtra("productId");
         categoryId = getIntent().getStringExtra("categoryId");
+        SubcategoryId = getIntent().getStringExtra("SubcategoryId");
         experience = getIntent().getStringExtra("experience");
         title = getIntent().getStringExtra("title");
         price = getIntent().getStringExtra("price");
@@ -128,12 +156,134 @@ public class EditProductDetails extends AppCompatActivity {
         inStock = getIntent().getStringExtra("inStock");
         soldBy = getIntent().getStringExtra("soldBy");
 
+        filelist = (ArrayList<ProductImageGetSet>) getIntent().getSerializableExtra("imagearray");
+
+        //Toast.makeText(this, ""+filelist, Toast.LENGTH_SHORT).show();
+
+        String im = "https://kisaanandfactory.com/static_file/"+filelist.get(0).getImageurl();
+
+        int size = filelist.size();
+
+        /*if(filelist.size() != 0){
+
+            for(int i=0;i < filelist.size();i++){
+
+                String storeImage = "https://kisaanandfactory.com/static_file/"+filelist.get(i).getImageurl();
+
+                imagejson.put(storeImage);
+            }
+        }*/
+
+        if(size == 1){
+
+            Log.d("fegdzxd", im);
+            Glide.with(EditProductDetails.this)
+                    .load(im)
+                    .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
+                            .error(R.drawable.product_image))
+                    .into(productimage1);
+
+            Log.d("fegdzxd", im);
+            Glide.with(EditProductDetails.this)
+                    .load(im)
+                    .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
+                            .error(R.drawable.product_image))
+                    .into(productimage2);
+
+            Log.d("fegdzxd", im);
+            Glide.with(EditProductDetails.this)
+                    .load(im)
+                    .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
+                            .error(R.drawable.product_image))
+                    .into(productimage3);
+
+        }else if(size == 2){
+
+            String value = "1";
+
+            for(int i=0;i < filelist.size();i++){
+
+                String image = "https://kisaanandfactory.com/static_file/"+filelist.get(i).getImageurl();
+
+                if(value.equals("1")){
+
+                    Log.d("fegdzxd", image);
+                    Glide.with(EditProductDetails.this)
+                            .load(image)
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
+                                    .error(R.drawable.product_image))
+                            .into(productimage1);
+
+                    value = "2";
+
+                }else if(value.equals("2")){
+
+                    Log.d("fegdzxd", image);
+                    Glide.with(EditProductDetails.this)
+                            .load(image)
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
+                                    .error(R.drawable.product_image))
+                            .into(productimage2);
+                }else{
+
+                    return;
+                }
+
+            }
+
+        }else if(size <= 3) {
+
+            String value = "1";
+
+            for (int i = 0; i < filelist.size(); i++) {
+
+                String image = "https://kisaanandfactory.com/static_file/" + filelist.get(i).getImageurl();
+
+                if (value.equals("1")) {
+
+                    Log.d("fegdzxd", image);
+                    Glide.with(EditProductDetails.this)
+                            .load(image)
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
+                                    .error(R.drawable.product_image))
+                            .into(productimage1);
+
+                    value = "2";
+
+                } else if (value.equals("2")) {
+
+                    Log.d("fegdzxd", image);
+                    Glide.with(EditProductDetails.this)
+                            .load(image)
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
+                                    .error(R.drawable.product_image))
+                            .into(productimage2);
+
+                    value = "3";
+
+                } else if (value.equals("3")) {
+
+                    Log.d("fegdzxd", image);
+                    Glide.with(EditProductDetails.this)
+                            .load(image)
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
+                                    .error(R.drawable.product_image))
+                            .into(productimage3);
+                } else {
+
+                    return;
+                }
+            }
+
+        }
+
         productname.setText(title);
         stock.setText(inStock);
         weight.setText(weight1);
         discount.setText(discount1);
-        retailprice.setText(price);
+        //retailprice.setText(price);
         description.setText(description1);
+        totalpayment.setText(price);
 
         typeArray = new ArrayList<>();
         typeArray.add("Select Type");
@@ -145,6 +295,67 @@ public class EditProductDetails extends AppCompatActivity {
         typVehicle.setDropDownViewResource(R.layout.spinneritem);
         prodty_spinner.setAdapter(typVehicle);
 
+        typeArray1 = new ArrayList<>();
+        typeArray1.add("Select Product Type");
+        typeArray1.add("Refundable");
+        typeArray1.add("Non-Refundable");
+
+        type_Array = new HashMap<>();
+        type_Array.put("Refundable","true");
+        type_Array.put("Non-Refundable","false");
+
+        ArrayAdapter<String> typVehicle1 = new ArrayAdapter<String>(EditProductDetails.this,
+                R.layout.spinnerfront2, typeArray1);
+        typVehicle1.setDropDownViewResource(R.layout.spinneritem);
+        prodty1_spinner.setAdapter(typVehicle1);
+
+        priceClc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (retailprice.getText().toString().trim().length() == 0) {
+                    retailprice.setError("enter product retail price");
+                    retailprice.requestFocus();
+
+                }else if (discount.getText().toString().trim().length() == 0) {
+                    discount.setError("enter discount price");
+                    discount.requestFocus();
+
+                }else{
+
+                    String str_gst = gst.getText().toString().trim();
+                    String str_servicecharges = servicecharges.getText().toString().trim();
+                    String str_commission = commission.getText().toString().trim();
+                    String str_VenderPrice = retailprice.getText().toString().trim();
+                    String str_Discount = discount.getText().toString().trim();
+
+                    int int_gst = Integer.valueOf(str_gst);
+                    int int_servicecharges = Integer.valueOf(str_servicecharges);
+                    int int_commission = Integer.valueOf(str_commission);
+                    int int_VenderPrice = Integer.valueOf(str_VenderPrice);
+                    int int_Discount = Integer.valueOf(str_Discount);
+
+                    float disc = int_VenderPrice * int_Discount / 100;
+                    float tot_pric = int_VenderPrice - disc;
+                    float gst = tot_pric * 18 / 100;
+                    float commi = tot_pric * 5 / 100;
+                    float coservic = tot_pric * 1 / 100;
+                    pricetot = tot_pric + gst + commi + coservic;
+
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    String pricetot1 =  df.format(pricetot);
+
+                    Log.d("ghghgh",String.valueOf(pricetot1));
+
+                    totalpayment.setText(pricetot1);
+
+                    // priceClculator(int_VenderPrice,int_Discount,0,int_commission,int_servicecharges,int_gst);
+
+
+                }
+
+            }
+        });
 
         btn_EditProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,6 +383,10 @@ public class EditProductDetails extends AppCompatActivity {
                     stock.setError("enter stock");
                     stock.requestFocus();
 
+                }else if(product.trim().length()==0){
+
+                    Toast.makeText(getApplicationContext(), "select product type", Toast.LENGTH_SHORT).show();
+
                 }else if(weight.getText().toString().trim().length()==0){
                     weight.setError("enter product weight");
                     weight.requestFocus();
@@ -180,32 +395,36 @@ public class EditProductDetails extends AppCompatActivity {
                     discount.setError("enter product discount");
                     discount.requestFocus();
 
-                }else if(retailprice.getText().toString().trim().length()==0){
-                    retailprice.setError("enter product retail price");
-                    retailprice.requestFocus();
+                }else if(totalpayment.getText().toString().trim().length()==0){
+                    totalpayment.setError("enter product retail price");
+                    totalpayment.requestFocus();
 
                 }else {
 
 
                     str_productname = productname.getText().toString();
-                    str_retailprice = Integer.parseInt(retailprice.getText().toString());
-                    str_discount = Integer.parseInt(discount.getText().toString());
+                    str_retailprice = Float.valueOf(totalpayment.getText().toString());
+                    str_discount = Float.valueOf(discount.getText().toString());
                     str_description = description.getText().toString();
-                    str_stock = Integer.parseInt(stock.getText().toString());
-                    str_weight = Integer.parseInt(weight.getText().toString());
-                    int int_experience = Integer.parseInt(experience);
+                    str_stock = Float.valueOf(stock.getText().toString());
+                    str_weight = Float.valueOf(weight.getText().toString());
+                    boolean isRefundable = Boolean.valueOf(bool_productType);
 
-                    if(experience.equals("0")){
+                    jsonObject_metadata = new JSONObject();
+                    try {
+                        jsonObject_metadata.put("color","");
+                        jsonObject_metadata.put("dimension","");
+                        jsonObject_metadata.put("quantity",0);
 
-                        int_experience = 1;
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
-                    editProduct(str_productname,str_retailprice,typeid,str_discount,str_description,soldBy,str_stock,int_experience,str_weight);
+                   editProduct(str_productname,str_retailprice,type,str_discount,str_description,soldBy,SubcategoryId,str_stock,str_weight,isRefundable,categoryId,jsonObject_metadata);
                 }
 
             }
         });
-
 
         prodty_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -259,6 +478,42 @@ public class EditProductDetails extends AppCompatActivity {
                 selectImg();
             }
         });
+
+        prodty1_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                product_type = prodty1_spinner.getItemAtPosition(prodty1_spinner.getSelectedItemPosition()).toString();
+                if (product_type.equalsIgnoreCase("Select Product Type")) {
+
+                   product = "";
+
+                } else {
+
+                    Log.d("hshkjbsan",product_type);
+
+                    if(product_type.equalsIgnoreCase("Refundable")){
+
+                        bool_productType = true;
+
+                    }else{
+
+                        bool_productType = false;
+                    }
+
+                    //bool_productType = Boolean.parseBoolean(produ_Type);
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                Toast.makeText(getApplicationContext(), "Select Type", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     public void selectImg() {
@@ -426,16 +681,21 @@ public class EditProductDetails extends AppCompatActivity {
         });
     }
 
-    public void editProduct(String title, int price, String type, int discount, String description,
-                            String soldBy, int inStock, int  experience,int weight){
+    public void editProduct(String title, float price, String type, float discount, String description,
+                            String soldBy,String subcategoryId, float inStock,float weight,
+                            boolean isRefundable,String categoryId,JSONObject jsonObject_metadata){
 
         progressbar.showDialog();
 
         JSONObject jsonObject = new JSONObject();
 
-            imagejson = new JSONArray();
+        imagejson = new JSONArray();
+
+        if(ImageArray.size() != 0){
+
             for (int m = 0; m < ImageArray.size(); m++) {
                 imagejson.put(ImageArray.get(m));
+            }
         }
 
         try {
@@ -446,11 +706,14 @@ public class EditProductDetails extends AppCompatActivity {
             jsonObject.put("discount",discount);
             jsonObject.put("description",description);
             jsonObject.put("soldBy",soldBy);
+            jsonObject.put("subcategoryId",subcategoryId);
             jsonObject.put("inStock",inStock);
-            jsonObject.put("experience",experience);
             jsonObject.put("images",imagejson);
             jsonObject.put("weight",weight);
+            jsonObject.put("isRefundable",isRefundable);
             jsonObject.put("categoryId",categoryId);
+            jsonObject.put("metadata",jsonObject_metadata);
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -535,5 +798,357 @@ public class EditProductDetails extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.getCache().clear();
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void getsuperCatecory() {
+
+        progressbar.showDialog();
+
+        superCategoryList = new ArrayList<>();
+        super_CategoryList = new HashMap<>();
+
+        String url = ServerLinks.getSupercategory;
+
+        Log.d("dssjhbjh",url);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, ServerLinks.getSupercategory, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressbar.hideDialog();
+
+                try {
+
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String code = jsonObject.getString("code");
+                    String err = jsonObject.getString("err");
+                    String msg = jsonObject.getString("msg");
+                    String data = jsonObject.getString("data");
+
+                    if (code.equals("200")) {
+
+                        Toast.makeText(EditProductDetails.this, msg, Toast.LENGTH_SHORT).show();
+
+                        JSONArray jsonArray_data = new JSONArray(data);
+
+                        for (int i = 0; i < jsonArray_data.length(); i++) {
+
+                            JSONObject jsonObject_data = jsonArray_data.getJSONObject(i);
+
+                            String _id = jsonObject_data.getString("_id");
+                            String name = jsonObject_data.getString("name");
+
+                            superCategoryList.add(name);
+                            super_CategoryList.put(name, _id);
+                        }
+
+                        superCategoryList.add(0, "Select SuperCategory");
+
+                        ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(EditProductDetails.this,
+                                R.layout.spinnerfront2, superCategoryList);
+                        dataAdapterVehicle.setDropDownViewResource(R.layout.spinneritem);
+                        supercategory.setAdapter(dataAdapterVehicle);
+
+                    } else {
+
+                        String message = jsonObject.getString("msg");
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressbar.hideDialog();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                    Toast.makeText(getApplicationContext(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Log.d("successresponceVolley", "" + error.networkResponse.statusCode);
+                    NetworkResponse networkResponse = error.networkResponse;
+                    if (networkResponse != null && networkResponse.data != null) {
+                        try {
+                            String jError = new String(networkResponse.data);
+                            JSONObject jsonError = new JSONObject(jError);
+
+                            String data = jsonError.getString("msg");
+                            Toast.makeText(EditProductDetails.this, data, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("successresponceVolley", "" + e);
+                        }
+
+
+                    }
+
+                }
+
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                String auth = session.getToken();
+                headers.put("auth-token", auth);
+                Log.d("fvsDevbf", "" + auth);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.d("fvsDevbf", "" + params);
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new
+                DefaultRetryPolicy(50000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+
+    public void getCategory(String supercategoryId){
+
+        progressbar.showDialog();
+
+        categoryList = new ArrayList<>();
+        category_List = new HashMap<>();
+
+        String category = ServerLinks.getCategory+supercategoryId;
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, category, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressbar.hideDialog();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String code = jsonObject.getString("code");
+                    String err = jsonObject.getString("err");
+                    String msg = jsonObject.getString("msg");
+                    String data = jsonObject.getString("data");
+
+                    if (code.equals("200")) {
+
+                        Toast.makeText(EditProductDetails.this, msg, Toast.LENGTH_SHORT).show();
+
+                        JSONArray jsonArray_data = new JSONArray(data);
+
+                        for (int i = 0; i < jsonArray_data.length(); i++) {
+
+                            JSONObject jsonObject_data = jsonArray_data.getJSONObject(i);
+
+                            String _id = jsonObject_data.getString("_id");
+                            String name = jsonObject_data.getString("name");
+                            String productType = jsonObject_data.getString("productType");
+                            String superCategoryId = jsonObject_data.getString("superCategoryId");
+
+                            categoryList.add(name);
+                            category_List.put(name, _id);
+                        }
+
+                        categoryList.add(0, "Select Category");
+
+                        ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(EditProductDetails.this,
+                                R.layout.spinnerfront2, categoryList);
+                        dataAdapterVehicle.setDropDownViewResource(R.layout.spinneritem);
+                        categories_spinner.setAdapter(dataAdapterVehicle);
+
+                    } else {
+
+                        String message = jsonObject.getString("msg");
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressbar.hideDialog();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                    Toast.makeText(getApplicationContext(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Log.d("successresponceVolley", "" + error.networkResponse.statusCode);
+                    NetworkResponse networkResponse = error.networkResponse;
+                    if (networkResponse != null && networkResponse.data != null) {
+                        try {
+                            String jError = new String(networkResponse.data);
+                            JSONObject jsonError = new JSONObject(jError);
+
+                            String data = jsonError.getString("msg");
+                            Toast.makeText(EditProductDetails.this, data, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("successresponceVolley", "" + e);
+                        }
+
+
+                    }
+
+                }
+
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                String auth = session.getToken();
+                headers.put("auth-token", auth);
+                Log.d("fvsDevbf", "" + auth);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.d("fvsDevbf", "" + params);
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(3000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(EditProductDetails.this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    public void getSubCategory(String subCategoryId){
+
+        progressbar.showDialog();
+
+        subcCategoryList = new ArrayList<>();
+        subCategory_List = new HashMap<>();
+
+        String category = ServerLinks.getSubCategory+subCategoryId;
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, category, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressbar.hideDialog();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String code = jsonObject.getString("code");
+                    String err = jsonObject.getString("err");
+                    String msg = jsonObject.getString("msg");
+                    String data = jsonObject.getString("data");
+
+                    if (code.equals("200")) {
+
+                        Toast.makeText(EditProductDetails.this, msg, Toast.LENGTH_SHORT).show();
+
+                        JSONArray jsonArray_data = new JSONArray(data);
+
+                        for (int i = 0; i < jsonArray_data.length(); i++) {
+
+                            JSONObject jsonObject_data = jsonArray_data.getJSONObject(i);
+
+                            String _id = jsonObject_data.getString("_id");
+                            String name = jsonObject_data.getString("name");
+                           /* String productType = jsonObject_data.getString("productType");
+                            String superCategoryId = jsonObject_data.getString("superCategoryId");*/
+
+                            subcCategoryList.add(name);
+                            subCategory_List.put(name, _id);
+
+                        }
+                        subcCategoryList.add(0,"select SubCategory");
+
+                        ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(EditProductDetails.this,
+                                R.layout.spinnerfront2, subcCategoryList);
+                        dataAdapterVehicle.setDropDownViewResource(R.layout.spinneritem);
+                        subcategory_spinner.setAdapter(dataAdapterVehicle);
+
+                    } else {
+
+                        String message = jsonObject.getString("msg");
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressbar.hideDialog();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                    Toast.makeText(getApplicationContext(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Log.d("successresponceVolley", "" + error.networkResponse.statusCode);
+                    NetworkResponse networkResponse = error.networkResponse;
+                    if (networkResponse != null && networkResponse.data != null) {
+                        try {
+                            String jError = new String(networkResponse.data);
+                            JSONObject jsonError = new JSONObject(jError);
+
+                            String data = jsonError.getString("msg");
+                            Toast.makeText(EditProductDetails.this, data, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("successresponceVolley", "" + e);
+                        }
+
+
+                    }
+
+                }
+
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                String auth = session.getToken();
+                headers.put("auth-token", auth);
+                Log.d("fvsDevbf", "" + auth);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.d("fvsDevbf", "" + params);
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(3000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(EditProductDetails.this);
+        requestQueue.add(stringRequest);
+
     }
 }

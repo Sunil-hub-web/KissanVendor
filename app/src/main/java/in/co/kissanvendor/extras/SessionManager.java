@@ -140,16 +140,6 @@ public class SessionManager {
         return sharedprefernceCoupon.getString(FCMId,"");
     }
 
-
-
-
-
-
-
-
-
-
-
     public void setUserID(String id ){
      editor.putString(User_Id,id);
      editor.commit();

@@ -1,27 +1,7 @@
 package in.co.kissanvendor.activities;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import in.co.kissanvendor.R;
-import in.co.kissanvendor.extras.ApiResponse;
-import in.co.kissanvendor.extras.ApiToJsonHandler;
-import in.co.kissanvendor.extras.FileUtils;
-import in.co.kissanvendor.extras.ImageResponse;
-import in.co.kissanvendor.extras.RealPathUtil;
-import in.co.kissanvendor.extras.ServerLinks;
-import in.co.kissanvendor.extras.SessionManager;
-import in.co.kissanvendor.extras.ViewDialog;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -40,6 +20,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -63,24 +48,46 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import in.co.kissanvendor.R;
+import in.co.kissanvendor.extras.ApiResponse;
+import in.co.kissanvendor.extras.ApiToJsonHandler;
+import in.co.kissanvendor.extras.FileUtils;
+import in.co.kissanvendor.extras.ImageResponse;
+import in.co.kissanvendor.extras.RealPathUtil;
+import in.co.kissanvendor.extras.ServerLinks;
+import in.co.kissanvendor.extras.SessionManager;
+import in.co.kissanvendor.extras.ViewDialog;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class AddNewProduct extends AppCompatActivity {
 
     ImageView menu;
     ViewDialog progressbar;
     SessionManager session;
-    TextView addnewproductbtn;
-    EditText productname, stock, weight, discount, retailprice, gst, description;
-    Spinner categories_spinner, producttype_spinner, prodty_spinner;
-    String catname = "", photostr1 = "", photostr2 = "", photostr3 = "", photoselection = "", catid = "", subcatcatname = "", subcatcatid = "", typename = "", typeid = "", ttl="", des="", sold="";
+    TextView addnewproductbtn,priceClc;
+    EditText productname, stock, weight, discount, retailprice, gst, description,servicecharges,
+             commission,totalpayment,dimention,color,quentity;
+    Spinner categories_spinner, producttype_spinner, prodty_spinner, prodty1_spinner, supercategory,
+            subcategory_spinner;
+    String catname = "", photostr1 = "", photostr2 = "", photostr3 = "", photoselection = "",
+            catid = "", subcatcatname = "", subcatcatid = "", typename = "", typeid = "", ttl = "",
+            des = "", sold = "", super_category = "",supercat = "",product_type = "",produ_Type = "";
     HashMap<String, String> hashCategories = new HashMap<String, String>();
     ArrayList<String> CategoriesArray = new ArrayList<>();
     HashMap<String, String> hashProducttype = new HashMap<String, String>();
     ArrayList<String> ProducttypeArray = new ArrayList<>();
     ArrayList<String> typeArray = new ArrayList<>();
+    ArrayList<String> typeArray1;
+    Map<String,String> type_Array;
     ArrayList<String> ImageArray = new ArrayList<>();
     ImageView productimage1, productimage2, productimage3;
     private String userChoosenTask;
@@ -88,11 +95,23 @@ public class AddNewProduct extends AppCompatActivity {
     private Bitmap bitmap;
     Uri photouri;
     boolean photoselected = false;
-    private File destination = null;
-    private String imgPath = null;
+    private final File destination = null;
+    private final String imgPath = null;
 
-    int prc = 0,  stok = 0, exp = 0, wt = 0, disc = 0;
+    int prc = 0, stok = 0, exp = 0, wt = 0, disc = 0;
+    float pricetot;
+    Boolean bool_productType = false;
 
+    ArrayList<String> superCategoryList;
+    HashMap<String, String> super_CategoryList;
+
+    ArrayList<String> categoryList;
+    HashMap<String, String> category_List;
+
+    ArrayList<String> subcCategoryList = new ArrayList<>();
+    HashMap<String, String> subCategory_List = new HashMap<>();
+
+    JSONObject jsonObject_metadata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,26 +139,15 @@ public class AddNewProduct extends AppCompatActivity {
                 catname = categories_spinner.getItemAtPosition(categories_spinner.getSelectedItemPosition()).toString();
                 if (catname.equalsIgnoreCase("Select Category")) {
 
-                    catid = "";
-                    subcatcatname = "";
-                    subcatcatid = "";
-
-                    ProducttypeArray = new ArrayList<>();
-                    hashProducttype = new HashMap<String, String>();
-                    ProducttypeArray.add(0, "Select Sub-Category");
-
-                    ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
-                            R.layout.spinnerfront2, ProducttypeArray);
-                    dataAdapterVehicle.setDropDownViewResource(R.layout.spinneritem);
-                    producttype_spinner.setAdapter(dataAdapterVehicle);
-
                 } else {
 
-                    subcatcatname = "";
-                    subcatcatid = "";
-                    catid = hashCategories.get(catname);
+                    //subcatcatname = "";
+                    //subcatcatid = "";
+                    catid = category_List.get(catname);
 
-                    GetProductType();
+                    //GetProductType();
+
+                    getSubCategory(catid);
 
                 }
             }
@@ -151,17 +159,17 @@ public class AddNewProduct extends AppCompatActivity {
             }
         });
 
-        producttype_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        subcategory_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                subcatcatname = producttype_spinner.getItemAtPosition(producttype_spinner.getSelectedItemPosition()).toString();
-                if (subcatcatname.equalsIgnoreCase("Select Sub-Category")) {
+                subcatcatname = subcategory_spinner.getItemAtPosition(subcategory_spinner.getSelectedItemPosition()).toString();
+                if (subcatcatname.equalsIgnoreCase("select SubCategory")) {
 
                     subcatcatid = "";
 
                 } else {
 
-                    subcatcatid = hashProducttype.get(subcatcatname);
+                    subcatcatid = subCategory_List.get(subcatcatname);
 
                 }
             }
@@ -183,9 +191,9 @@ public class AddNewProduct extends AppCompatActivity {
 
                 } else {
 
-                    if(typename.equalsIgnoreCase("Goods")) {
+                    if (typename.equalsIgnoreCase("Goods")) {
                         typeid = "product";
-                    }else{
+                    } else {
                         typeid = "service";
                     }
 
@@ -196,6 +204,66 @@ public class AddNewProduct extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
                 // DO Nothing here
                 Toast.makeText(getApplicationContext(), "Select Type", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        prodty1_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                product_type = prodty1_spinner.getItemAtPosition(prodty1_spinner.getSelectedItemPosition()).toString();
+                if (product_type.equalsIgnoreCase("Select Product Type")) {
+
+                    //Toast.makeText(AddNewProduct.this, "Select Product Type", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                   Log.d("hshkjbsan",product_type);
+
+                    if(product_type.equalsIgnoreCase("Refundable")){
+
+                        bool_productType = true;
+
+                    }else{
+
+                        bool_productType = false;
+                    }
+
+                    //bool_productType = Boolean.parseBoolean(produ_Type);
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                Toast.makeText(getApplicationContext(), "Select Type", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        supercategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                super_category = supercategory.getItemAtPosition(supercategory.getSelectedItemPosition()).toString();
+
+                if(super_category.equalsIgnoreCase("Select SuperCategory")){
+
+                    supercat = "";
+
+                }else{
+
+                    supercat = super_CategoryList.get(super_category);
+
+                    getCategory(supercat);
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -223,59 +291,130 @@ public class AddNewProduct extends AppCompatActivity {
             }
         });
 
+        priceClc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (retailprice.getText().toString().trim().length() == 0) {
+                    retailprice.setError("enter product retail price");
+                    retailprice.requestFocus();
+
+                }else if (discount.getText().toString().trim().length() == 0) {
+                    discount.setError("enter discount price");
+                    discount.requestFocus();
+
+                }else{
+
+                    String str_gst = gst.getText().toString().trim();
+                    String str_servicecharges = servicecharges.getText().toString().trim();
+                    String str_commission = commission.getText().toString().trim();
+                    String str_VenderPrice = retailprice.getText().toString().trim();
+                    String str_Discount = discount.getText().toString().trim();
+
+                    int int_gst = Integer.valueOf(str_gst);
+                    int int_servicecharges = Integer.valueOf(str_servicecharges);
+                    int int_commission = Integer.valueOf(str_commission);
+                    int int_VenderPrice = Integer.valueOf(str_VenderPrice);
+                    int int_Discount = Integer.valueOf(str_Discount);
+
+                    float disc = int_VenderPrice * int_Discount / 100;
+                    float tot_pric = int_VenderPrice - disc;
+                    float gst = tot_pric * 18 / 100;
+                    float commi = tot_pric * 5 / 100;
+                    float coservic = tot_pric * 1 / 100;
+                    pricetot = tot_pric + gst + commi + coservic;
+
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    String pricetot1 =  df.format(pricetot);
+
+                    Log.d("ghghgh",String.valueOf(pricetot1));
+
+                    totalpayment.setText(pricetot1);
+
+                   // priceClculator(int_VenderPrice,int_Discount,0,int_commission,int_servicecharges,int_gst);
+
+
+                }
+
+            }
+        });
+
         addnewproductbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ImageArray = new ArrayList<>();
-                if(photostr1.length()!=0){
+                if (photostr1.length() != 0) {
                     ImageArray.add(photostr1);
                 }
-                if(photostr2.length()!=0){
+                if (photostr2.length() != 0) {
                     ImageArray.add(photostr2);
                 }
-                if(photostr3.length()!=0){
+                if (photostr3.length() != 0) {
                     ImageArray.add(photostr3);
                 }
 
-                if(productname.getText().toString().trim().length()==0){
+                if (productname.getText().toString().trim().length() == 0) {
                     productname.setError("enter product name");
                     productname.requestFocus();
 
-                }else if(typeid.toString().trim().length()==0){
+                } else if (typeid.trim().length() == 0) {
                     Toast.makeText(getApplicationContext(), "select product type", Toast.LENGTH_SHORT).show();
 
-                }else if(catid.toString().trim().length()==0){
+                } else if (catid.trim().length() == 0) {
                     Toast.makeText(getApplicationContext(), "select category", Toast.LENGTH_SHORT).show();
 
-                }else if(subcatcatid.toString().trim().length()==0){
+                } else if (subcatcatid.trim().length() == 0) {
                     Toast.makeText(getApplicationContext(), "select sub-category", Toast.LENGTH_SHORT).show();
 
-                }else if(stock.getText().toString().trim().length()==0){
+                } else if (stock.getText().toString().trim().length() == 0) {
                     stock.setError("enter stock");
                     stock.requestFocus();
 
-                }else if(weight.getText().toString().trim().length()==0){
+                } else if (weight.getText().toString().trim().length() == 0) {
                     weight.setError("enter product weight");
                     weight.requestFocus();
 
-                }else if(discount.getText().toString().trim().length()==0){
+                } else if (discount.getText().toString().trim().length() == 0) {
                     discount.setError("enter product discount");
                     discount.requestFocus();
 
-                }else if(retailprice.getText().toString().trim().length()==0){
+                } else if (retailprice.getText().toString().trim().length() == 0) {
                     retailprice.setError("enter product retail price");
                     retailprice.requestFocus();
 
-                }else {
+                } else if (product_type.trim().length() == 0) {
 
-                    ttl=productname.getText().toString();
-                    prc= Integer.parseInt(retailprice.getText().toString());
-                    disc= Integer.parseInt(discount.getText().toString());
-                    des=description.getText().toString();
-                    sold=session.getUserID();
-                    stok= Integer.parseInt(stock.getText().toString());
-                    exp=0;
-                    wt= Integer.parseInt(weight.getText().toString());
+                    Toast.makeText(AddNewProduct.this, "Select Product Type", Toast.LENGTH_SHORT).show();
+
+                }else if (totalpayment.getText().toString().trim().length() == 0) {
+
+                    Toast.makeText(AddNewProduct.this, "Please select total price", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    ttl = productname.getText().toString();
+                    prc = Integer.parseInt(retailprice.getText().toString());
+                    disc = Integer.parseInt(discount.getText().toString());
+                    des = description.getText().toString();
+                    sold = session.getUserID();
+                    stok = Integer.parseInt(stock.getText().toString());
+                    exp = 0;
+                    wt = Integer.parseInt(weight.getText().toString());
+
+                    String str_quentity = quentity.getText().toString().trim();
+                    int int_quentity = Integer.parseInt(str_quentity);
+                    String str_dimention = dimention.getText().toString().trim();
+                    String str_color = color.getText().toString().trim();
+
+                    jsonObject_metadata = new JSONObject();
+                    try {
+                        jsonObject_metadata.put("color",str_color);
+                        jsonObject_metadata.put("dimension",str_dimention);
+                        jsonObject_metadata.put("quantity",int_quentity);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                     addProduct();
                 }
@@ -287,12 +426,28 @@ public class AddNewProduct extends AppCompatActivity {
         typeArray.add("Goods");
         typeArray.add("Services");
 
-        ArrayAdapter<String>typVehicle = new ArrayAdapter<String>(AddNewProduct.this,
+        ArrayAdapter<String> typVehicle = new ArrayAdapter<String>(AddNewProduct.this,
                 R.layout.spinnerfront2, typeArray);
         typVehicle.setDropDownViewResource(R.layout.spinneritem);
         prodty_spinner.setAdapter(typVehicle);
 
-        GetCategories();
+        typeArray1 = new ArrayList<>();
+        typeArray1.add("Select Product Type");
+        typeArray1.add("Refundable");
+        typeArray1.add("Non-Refundable");
+
+        type_Array = new HashMap<>();
+        type_Array.put("Refundable","true");
+        type_Array.put("Non-Refundable","false");
+
+        ArrayAdapter<String> typVehicle1 = new ArrayAdapter<String>(AddNewProduct.this,
+                R.layout.spinnerfront2, typeArray1);
+        typVehicle1.setDropDownViewResource(R.layout.spinneritem);
+        prodty1_spinner.setAdapter(typVehicle1);
+
+        //GetCategories();
+
+        getsuperCatecory();
     }
 
     public void InIt() {
@@ -300,11 +455,13 @@ public class AddNewProduct extends AppCompatActivity {
         menu = findViewById(R.id.menu);
         categories_spinner = findViewById(R.id.categories_spinner);
         prodty_spinner = findViewById(R.id.prodty_spinner);
-        producttype_spinner = findViewById(R.id.producttype_spinner);
+        prodty1_spinner = findViewById(R.id.prodty1_spinner);
+        subcategory_spinner = findViewById(R.id.subcategory_spinner);
         productimage1 = findViewById(R.id.productimage1);
         productimage2 = findViewById(R.id.productimage2);
         productimage3 = findViewById(R.id.productimage3);
         addnewproductbtn = findViewById(R.id.addnewproductbtn);
+        supercategory = findViewById(R.id.supercategory);
         productname = findViewById(R.id.productname);
         stock = findViewById(R.id.stock);
         weight = findViewById(R.id.weight);
@@ -312,6 +469,13 @@ public class AddNewProduct extends AppCompatActivity {
         retailprice = findViewById(R.id.retailprice);
         gst = findViewById(R.id.gst);
         description = findViewById(R.id.description);
+        priceClc = findViewById(R.id.priceClc);
+        servicecharges = findViewById(R.id.servicecharges);
+        commission = findViewById(R.id.commission);
+        totalpayment = findViewById(R.id.totalpayment);
+        dimention = findViewById(R.id.dimention);
+        color = findViewById(R.id.color);
+        quentity = findViewById(R.id.quentity);
 
     }
 
@@ -420,8 +584,8 @@ public class AddNewProduct extends AppCompatActivity {
         ProducttypeArray = new ArrayList<>();
         hashProducttype = new HashMap<String, String>();
 
-        Log.d("fvsDevbf", ServerLinks.getProductTypes_url+catid);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, ServerLinks.getProductTypes_url+catid,
+        Log.d("fvsDevbf", ServerLinks.getProductTypes_url + catid);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, ServerLinks.getProductTypes_url + catid,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -432,23 +596,22 @@ public class AddNewProduct extends AppCompatActivity {
                             if (jsonObject.getString("code").equals("200")) {
 
 
+                                JSONArray dataorder = jsonObject.getJSONArray("data");
+                                for (int i = 0; i < dataorder.length(); i++) {
+                                    JSONObject itemarray = dataorder.getJSONObject(i);
+                                    String _id = itemarray.getString("_id");
+                                    String name = itemarray.getString("name");
 
-                                    JSONArray dataorder = jsonObject.getJSONArray("data");
-                                    for (int i = 0; i < dataorder.length(); i++) {
-                                        JSONObject itemarray = dataorder.getJSONObject(i);
-                                        String _id = itemarray.getString("_id");
-                                        String name = itemarray.getString("name");
+                                    hashProducttype.put(name, _id);
+                                    ProducttypeArray.add(name);
+                                }
 
-                                        hashProducttype.put(name, _id);
-                                        ProducttypeArray.add(name);
-                                    }
+                                ProducttypeArray.add(0, "Select Sub-Category");
 
-                                    ProducttypeArray.add(0, "Select Sub-Category");
-
-                                    ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
-                                            R.layout.spinnerfront2, ProducttypeArray);
-                                    dataAdapterVehicle.setDropDownViewResource(R.layout.spinneritem);
-                                    producttype_spinner.setAdapter(dataAdapterVehicle);
+                                ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
+                                        R.layout.spinnerfront2, ProducttypeArray);
+                                dataAdapterVehicle.setDropDownViewResource(R.layout.spinneritem);
+                                producttype_spinner.setAdapter(dataAdapterVehicle);
 
                                 progressbar.hideDialog();
                             } else {
@@ -542,7 +705,7 @@ public class AddNewProduct extends AppCompatActivity {
         try {
 
             paramjson.put("title", ttl);
-            paramjson.put("price", prc);
+            paramjson.put("price", pricetot);
             paramjson.put("type", typeid);
             paramjson.put("discount", disc);
             paramjson.put("description", des);
@@ -552,13 +715,16 @@ public class AddNewProduct extends AppCompatActivity {
             paramjson.put("experience", exp);
             paramjson.put("images", imagejson);
             paramjson.put("weight", wt);
+            paramjson.put("isRefundable", bool_productType);
             paramjson.put("categoryId", catid);
+            paramjson.put("metadata", jsonObject_metadata);
 
             Log.d("successresponceVolley", "" + paramjson);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, ServerLinks.addProduct_url, paramjson,new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, ServerLinks.addProduct_url, paramjson, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.i("onResponse", response.toString());
@@ -623,7 +789,7 @@ public class AddNewProduct extends AppCompatActivity {
                 Map<String, String> headers = new HashMap<>();
                 String auth = session.getToken();
                 headers.put("auth-token", auth);
-                Log.d("fvsDevbf", ""+auth);
+                Log.d("fvsDevbf", "" + auth);
                 return headers;
             }
         };
@@ -711,21 +877,20 @@ public class AddNewProduct extends AppCompatActivity {
         if (requestCode == 5 && resultCode == RESULT_OK) {
 
             try {
-                    // photouri = data.getData();
+                // photouri = data.getData();
 
-                    productimage1.setImageURI(photouri);
-                    bitmap = (Bitmap) data.getExtras().get("data");
-                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
-                    String path = MediaStore.Images.Media.insertImage(AddNewProduct.this.getContentResolver(), bitmap, "Title", null);
-                    Log.d("vbrfxgfecs", "Pick from Camera::>>> "+bitmap);
-                    photouri = Uri.parse(path);
-                    Log.d("vbrfxgfe", "Pick from Camera::>>> "+photouri);
-                    photoselected = true;
+                productimage1.setImageURI(photouri);
+                bitmap = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+                String path = MediaStore.Images.Media.insertImage(AddNewProduct.this.getContentResolver(), bitmap, "Title", null);
+                Log.d("vbrfxgfecs", "Pick from Camera::>>> " + bitmap);
+                photouri = Uri.parse(path);
+                Log.d("vbrfxgfe", "Pick from Camera::>>> " + photouri);
+                photoselected = true;
 
 
-
-                    upload(bitmap);
+                upload(bitmap);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -770,15 +935,13 @@ public class AddNewProduct extends AppCompatActivity {
 
         progressbar.showDialog();
 
-        String path = RealPathUtil.getRealPath(AddNewProduct.this,photouri);
+        String path = RealPathUtil.getRealPath(AddNewProduct.this, photouri);
         File file = new File(path);
 
         RequestBody imageBode = RequestBody.create(MediaType.parse(getContentResolver().getType(photouri)), file);
         MultipartBody.Part partImage = MultipartBody.Part.createFormData("photo", "productimage.png", imageBode);
 
-        Log.d("fvsdz", ""+photouri);
-
-
+        Log.d("fvsdz", "" + photouri);
 
         Call<ImageResponse> call = new ApiToJsonHandler().uploadImage(session.getToken(), partImage);
         call.enqueue(new Callback<ImageResponse>() {
@@ -790,18 +953,18 @@ public class AddNewProduct extends AppCompatActivity {
                     progressbar.hideDialog();
 
                     // get the path and save it to images array
-                    Log.d("fvsdzfvfc", ""+response.body().getMsg().getFilename());
-                    Log.d("fvsdzfvfc", ""+response.body().getMsg().getPath());
+                    Log.d("fvsdzfvfc", "" + response.body().getMsg().getFilename());
+                    Log.d("fvsdzfvfc", "" + response.body().getMsg().getPath());
 
-                    if(photoselection.equalsIgnoreCase("1")){
+                    if (photoselection.equalsIgnoreCase("1")) {
                         productimage1.setImageBitmap(bitmap);
                         photostr1 = response.body().getMsg().getFilename();
 
-                    }else if(photoselection.equalsIgnoreCase("2")){
+                    } else if (photoselection.equalsIgnoreCase("2")) {
                         productimage2.setImageBitmap(bitmap);
                         photostr2 = response.body().getMsg().getFilename();
 
-                    }else if(photoselection.equalsIgnoreCase("3")){
+                    } else if (photoselection.equalsIgnoreCase("3")) {
                         productimage3.setImageBitmap(bitmap);
                         photostr3 = response.body().getMsg().getFilename();
 
@@ -814,14 +977,463 @@ public class AddNewProduct extends AppCompatActivity {
                     Toast.makeText(AddNewProduct.this, message.getMsg(), Toast.LENGTH_SHORT).show();
                 }
             }
-           
+
             @Override
             public void onFailure(Call<ImageResponse> call, Throwable t) {
                 progressbar.hideDialog();
                 Toast.makeText(AddNewProduct.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("getMessage",t.getMessage());
+                Log.d("getMessage", t.getMessage());
             }
         });
+    }
+
+    public void getsuperCatecory() {
+
+        progressbar.showDialog();
+
+        superCategoryList = new ArrayList<>();
+        super_CategoryList = new HashMap<>();
+
+        String url = ServerLinks.getSupercategory;
+
+        Log.d("dssjhbjh",url);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, ServerLinks.getSupercategory, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressbar.hideDialog();
+
+                try {
+
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String code = jsonObject.getString("code");
+                    String err = jsonObject.getString("err");
+                    String msg = jsonObject.getString("msg");
+                    String data = jsonObject.getString("data");
+
+                    if (code.equals("200")) {
+
+                        Toast.makeText(AddNewProduct.this, msg, Toast.LENGTH_SHORT).show();
+
+                        JSONArray jsonArray_data = new JSONArray(data);
+
+                        for (int i = 0; i < jsonArray_data.length(); i++) {
+
+                            JSONObject jsonObject_data = jsonArray_data.getJSONObject(i);
+
+                            String _id = jsonObject_data.getString("_id");
+                            String name = jsonObject_data.getString("name");
+
+                            superCategoryList.add(name);
+                            super_CategoryList.put(name, _id);
+                        }
+
+                        superCategoryList.add(0, "Select SuperCategory");
+
+                        ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
+                                R.layout.spinnerfront2, superCategoryList);
+                        dataAdapterVehicle.setDropDownViewResource(R.layout.spinneritem);
+                        supercategory.setAdapter(dataAdapterVehicle);
+
+                    } else {
+
+                        String message = jsonObject.getString("msg");
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressbar.hideDialog();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                    Toast.makeText(getApplicationContext(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Log.d("successresponceVolley", "" + error.networkResponse.statusCode);
+                    NetworkResponse networkResponse = error.networkResponse;
+                    if (networkResponse != null && networkResponse.data != null) {
+                        try {
+                            String jError = new String(networkResponse.data);
+                            JSONObject jsonError = new JSONObject(jError);
+
+                            String data = jsonError.getString("msg");
+                            Toast.makeText(AddNewProduct.this, data, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("successresponceVolley", "" + e);
+                        }
+
+
+                    }
+
+                }
+
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                String auth = session.getToken();
+                headers.put("auth-token", auth);
+                Log.d("fvsDevbf", "" + auth);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.d("fvsDevbf", "" + params);
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new
+                DefaultRetryPolicy(50000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+
+    public void getCategory(String supercategoryId){
+
+        progressbar.showDialog();
+
+        categoryList = new ArrayList<>();
+        category_List = new HashMap<>();
+
+        String category = ServerLinks.getCategory+supercategoryId;
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, category, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressbar.hideDialog();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String code = jsonObject.getString("code");
+                    String err = jsonObject.getString("err");
+                    String msg = jsonObject.getString("msg");
+                    String data = jsonObject.getString("data");
+
+                    if (code.equals("200")) {
+
+                        Toast.makeText(AddNewProduct.this, msg, Toast.LENGTH_SHORT).show();
+
+                        JSONArray jsonArray_data = new JSONArray(data);
+
+                        for (int i = 0; i < jsonArray_data.length(); i++) {
+
+                            JSONObject jsonObject_data = jsonArray_data.getJSONObject(i);
+
+                            String _id = jsonObject_data.getString("_id");
+                            String name = jsonObject_data.getString("name");
+                            String productType = jsonObject_data.getString("productType");
+                            String superCategoryId = jsonObject_data.getString("superCategoryId");
+
+                            categoryList.add(name);
+                            category_List.put(name, _id);
+                        }
+
+                        categoryList.add(0, "Select Category");
+
+                        ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
+                                R.layout.spinnerfront2, categoryList);
+                        dataAdapterVehicle.setDropDownViewResource(R.layout.spinneritem);
+                        categories_spinner.setAdapter(dataAdapterVehicle);
+
+                    } else {
+
+                        String message = jsonObject.getString("msg");
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressbar.hideDialog();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                    Toast.makeText(getApplicationContext(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Log.d("successresponceVolley", "" + error.networkResponse.statusCode);
+                    NetworkResponse networkResponse = error.networkResponse;
+                    if (networkResponse != null && networkResponse.data != null) {
+                        try {
+                            String jError = new String(networkResponse.data);
+                            JSONObject jsonError = new JSONObject(jError);
+
+                            String data = jsonError.getString("msg");
+                            Toast.makeText(AddNewProduct.this, data, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("successresponceVolley", "" + e);
+                        }
+
+
+                    }
+
+                }
+
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                String auth = session.getToken();
+                headers.put("auth-token", auth);
+                Log.d("fvsDevbf", "" + auth);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.d("fvsDevbf", "" + params);
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(3000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(AddNewProduct.this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    public void getSubCategory(String subCategoryId){
+
+        progressbar.showDialog();
+
+        subcCategoryList = new ArrayList<>();
+        subCategory_List = new HashMap<>();
+
+        String category = ServerLinks.getSubCategory+subCategoryId;
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, category, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressbar.hideDialog();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String code = jsonObject.getString("code");
+                    String err = jsonObject.getString("err");
+                    String msg = jsonObject.getString("msg");
+                    String data = jsonObject.getString("data");
+
+                    if (code.equals("200")) {
+
+                        Toast.makeText(AddNewProduct.this, msg, Toast.LENGTH_SHORT).show();
+
+                        JSONArray jsonArray_data = new JSONArray(data);
+
+                        for (int i = 0; i < jsonArray_data.length(); i++) {
+
+                            JSONObject jsonObject_data = jsonArray_data.getJSONObject(i);
+
+                            String _id = jsonObject_data.getString("_id");
+                            String name = jsonObject_data.getString("name");
+                           /* String productType = jsonObject_data.getString("productType");
+                            String superCategoryId = jsonObject_data.getString("superCategoryId");*/
+
+                            subcCategoryList.add(name);
+                            subCategory_List.put(name, _id);
+
+                        }
+                        subcCategoryList.add(0,"select SubCategory");
+
+                        ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
+                                R.layout.spinnerfront2, subcCategoryList);
+                        dataAdapterVehicle.setDropDownViewResource(R.layout.spinneritem);
+                        subcategory_spinner.setAdapter(dataAdapterVehicle);
+
+                    } else {
+
+                        String message = jsonObject.getString("msg");
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressbar.hideDialog();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                    Toast.makeText(getApplicationContext(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Log.d("successresponceVolley", "" + error.networkResponse.statusCode);
+                    NetworkResponse networkResponse = error.networkResponse;
+                    if (networkResponse != null && networkResponse.data != null) {
+                        try {
+                            String jError = new String(networkResponse.data);
+                            JSONObject jsonError = new JSONObject(jError);
+
+                            String data = jsonError.getString("msg");
+                            Toast.makeText(AddNewProduct.this, data, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("successresponceVolley", "" + e);
+                        }
+
+
+                    }
+
+                }
+
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                String auth = session.getToken();
+                headers.put("auth-token", auth);
+                Log.d("fvsDevbf", "" + auth);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.d("fvsDevbf", "" + params);
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(3000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(AddNewProduct.this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    public void priceClculator(int priceByVendor,int discount,int refundCharge,int commission,int serviceCharge,int gst){
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+
+            jsonObject.put("priceByVendor",priceByVendor);
+            jsonObject.put("discount",discount);
+            jsonObject.put("refundCharge",refundCharge);
+            jsonObject.put("commission",commission);
+            jsonObject.put("serviceCharge",serviceCharge);
+            jsonObject.put("gst",gst);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ServerLinks.priceCalculator, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+
+                    String code = response.getString("code");
+                    String err = response.getString("err");
+                    String msg = response.getString("msg");
+                    String amountPaidByUser = response.getString("amountPaidByUser");
+
+                    if(code.equals("200")){
+
+                        totalpayment.setText(amountPaidByUser);
+
+                    }else{
+
+                        Toast.makeText(AddNewProduct.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressbar.hideDialog();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                    Toast.makeText(getApplicationContext(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Log.d("successresponceVolley", "" + error.networkResponse.statusCode);
+                    NetworkResponse networkResponse = error.networkResponse;
+                    if (networkResponse != null && networkResponse.data != null) {
+                        try {
+                            String jError = new String(networkResponse.data);
+                            JSONObject jsonError = new JSONObject(jError);
+
+                            String data = jsonError.getString("msg");
+                            Toast.makeText(AddNewProduct.this, data, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("successresponceVolley", "" + e);
+                        }
+
+
+                    }
+
+                }
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                String auth = session.getToken();
+                headers.put("auth-token", auth);
+                Log.d("fvsDevbf", "" + auth);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.d("fvsDevbf", "" + params);
+                return params;
+            }
+
+        };
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(3000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(AddNewProduct.this);
+        requestQueue.add(jsonObjectRequest);
+
     }
 }
 

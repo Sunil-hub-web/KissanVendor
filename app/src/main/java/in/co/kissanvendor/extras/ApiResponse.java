@@ -5,12 +5,8 @@ import java.util.List;
 public class ApiResponse {
     private int code;
     private boolean err;
-
     private String token;
     private String msg;
-
-
-
 
     public String getToken() {
         return token;
@@ -27,8 +23,6 @@ public class ApiResponse {
     public void setMsg(String msg) {
         this.msg = msg;
     }
-
-
 
     public int getCode() {
         return code;

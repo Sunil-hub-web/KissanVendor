@@ -129,7 +129,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             @Override
             public void onClick(View v) {
 
+                ArrayList<ProductImageGetSet> getProductimagearray1 = new ArrayList<>();
+                getProductimagearray1 = movie.getProductimagearray();
+
+
                 Intent intent = new Intent(context, EditProductDetails.class);
+
                 intent.putExtra("productId",movie.get_id());
                 intent.putExtra("categoryId",movie.getCategoryId());
                 intent.putExtra("experience",movie.getExperience());
@@ -139,9 +144,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 intent.putExtra("type",movie.getType());
                 intent.putExtra("discount",movie.getDiscount());
                 intent.putExtra("description",movie.getDescription());
+                intent.putExtra("SubcategoryId",movie.getSubcategoryId());
 
                 intent.putExtra("weight",movie.getWeight().get(0).getWeight());
                 intent.putExtra("inStock",movie.getInStock());
+                intent.putExtra("imagearray", (Serializable) movie.getProductimagearray());
+
 
                 context.startActivity(intent);
             }

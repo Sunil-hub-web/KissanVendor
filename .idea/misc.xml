@@ -56,8 +56,11 @@
         <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/spinnerfront2.xml" value="0.12195945945945946" />
         <entry key="..\:/Android project/KissanVendor/app/src/main/res/layout/spinneritem.xml" value="0.12195945945945946" />
         <entry key="..\:/Android project/KissanVendor/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.12374581939799331" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/drawable/frame_23.xml" value="0.1105" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/drawable/homebrand_bg.xml" value="0.1285" />
-        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_add_new_product.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.1415" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/drawable/rectangle_3.xml" value="0.1415" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_add_new_product.xml" value="0.17" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_dash_board.xml" value="0.14180602006688964" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_edit_product_details.xml" value="0.21" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/activity_landing.xml" value="0.14180602006688964" />
@@ -68,20 +71,24 @@
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/canceled_order_layout.xml" value="0.14324324324324325" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/changestatus_dialog.xml" value="0.14324324324324325" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/content_dash_board.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/dialog1forshow.xml" value="0.14256756756756755" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/fragment_home.xml" value="0.14180602006688964" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/fragment_myaccount.xml" value="0.13055555555555556" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/fragment_myorders.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/fragment_payment.xml" value="0.1" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/fragment_product_list.xml" value="0.14180602006688964" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/nav_header_dash_board.xml" value="0.13055555555555556" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/pendingorder_item_layout.xml" value="0.21" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/product_item_layout.xml" value="0.18" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/spinnerfront2.xml" value="0.14180602006688964" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/spinneritem.xml" value="0.14324324324324325" />
+        <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/layout/walletdetails.xml" value="0.14256756756756755" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/menu/activity_main_drawer.xml" value="0.14324324324324325" />
         <entry key="..\:/New folder/KissanVendor/KissanVendor/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1285" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

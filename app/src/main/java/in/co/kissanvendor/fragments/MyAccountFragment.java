@@ -414,6 +414,7 @@ public class MyAccountFragment extends Fragment {
 
                         edit.setVisibility(View.VISIBLE);
                         save_btn.setVisibility(View.GONE);
+
                     } else {
                         String message = response.getString("msg");
 
@@ -502,7 +503,7 @@ public class MyAccountFragment extends Fragment {
         Pattern pattern;
         Matcher matcher;
 
-        final String PASSWORD_PATTERN =  "^[A-Z]{4,}0[A-Z0-9]{6,}$";
+        final String PASSWORD_PATTERN =  "^[A-Za-z]{4,}0[A-Z0-9]{6,}$";
 
         pattern =  Pattern.compile (PASSWORD_PATTERN);
         matcher = pattern.matcher (ifsccode);

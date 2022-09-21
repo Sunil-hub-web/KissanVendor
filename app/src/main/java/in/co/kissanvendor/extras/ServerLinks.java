@@ -21,5 +21,11 @@ public class ServerLinks {
     public static final String editproduct = "https://kisaanandfactory.com/api/v1/vendorapp/vendor/product/edit/";
     public static final String statusupdate = "https://kisaanandfactory.com/api/v1/vendorapp/view/myOrders/status/update/";
     public static final String sociallogin = "https://kisaanandfactory.com/api/v1/vendorapp/auth/register/social-login";
+    public static final String getSupercategory = MAIN_URL+"adminapp/product/productSuperCategories";
+    public static final String getCategory = MAIN_URL+"vendorapp/vendor/product/category/all?superCategoryId=";
+    public static final String getSubCategory = MAIN_URL+"adminapp/product/sub-category/all?CategoryId=";
+    public static final String priceCalculator = MAIN_URL+"vendorapp/vendor/product/priceCalculator";
+
 //    public static final String orderHistory_url = MAIN_URL+"vendorapp/view/payment-history";
+
 }

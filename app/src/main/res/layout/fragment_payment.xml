@@ -65,17 +65,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/my_payment_"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/twenty_five"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="@dimen/five"
-            android:text="@string/my_payment_"
-            android:textAppearance="@style/my_payment_"
-            android:gravity="top" />
+            <TextView
+                android:id="@+id/my_payment_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/twenty_five"
+                android:layout_marginTop="@dimen/five"
+                android:gravity="top"
+                android:text="@string/my_payment_"
+                android:textAppearance="@style/my_payment_" />
 
             <TextView
                 android:id="@+id/today_"

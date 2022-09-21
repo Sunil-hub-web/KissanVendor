@@ -22,6 +22,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -47,10 +52,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import in.co.kissanvendor.R;
 import in.co.kissanvendor.adapters.CancelledOrderAdapter;
 import in.co.kissanvendor.extras.ServerLinks;
@@ -191,8 +192,8 @@ public class MyOrdersFragment extends Fragment {
     public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapter.MyViewHolder> implements Filterable {
 
         private LayoutInflater inflater;
-        private Context context;
-        private List<OrderGetSet> accepetedJobLists;
+        private final Context context;
+        private final List<OrderGetSet> accepetedJobLists;
         private List<OrderGetSet> filteredlist;
         public int cnt;
 
@@ -209,7 +210,7 @@ public class MyOrdersFragment extends Fragment {
         @Override
         public PendingOrderAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            View view = inflater.from(parent.getContext()).inflate(R.layout.pendingorder_item_layout, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pendingorder_item_layout, parent, false);
             PendingOrderAdapter.MyViewHolder holder = new PendingOrderAdapter.MyViewHolder(view);
             return holder;
 
@@ -316,26 +317,26 @@ public class MyOrdersFragment extends Fragment {
             public MyViewHolder(View itemView) {
                 super(itemView);
 
-                heading_date = (TextView) itemView.findViewById(R.id.heading_date);
-                heading_name = (TextView) itemView.findViewById(R.id.heading_name);
-                heading_orderid = (TextView) itemView.findViewById(R.id.heading_orderid);
-                heading_amount = (TextView) itemView.findViewById(R.id.heading_amount);
-                heading_viewdetails = (RelativeLayout) itemView.findViewById(R.id.heading_viewdetails);
-                headinglayout = (LinearLayout) itemView.findViewById(R.id.headinglayout);
-                detaillayout = (LinearLayout) itemView.findViewById(R.id.detaillayout);
-                changestat_l = (LinearLayout) itemView.findViewById(R.id.changestat_l);
-                selectioncheckbox = (CheckBox) itemView.findViewById(R.id.selectioncheckbox);
+                heading_date = itemView.findViewById(R.id.heading_date);
+                heading_name = itemView.findViewById(R.id.heading_name);
+                heading_orderid = itemView.findViewById(R.id.heading_orderid);
+                heading_amount = itemView.findViewById(R.id.heading_amount);
+                heading_viewdetails = itemView.findViewById(R.id.heading_viewdetails);
+                headinglayout = itemView.findViewById(R.id.headinglayout);
+                detaillayout = itemView.findViewById(R.id.detaillayout);
+                changestat_l = itemView.findViewById(R.id.changestat_l);
+                selectioncheckbox = itemView.findViewById(R.id.selectioncheckbox);
 
 
-                text_ProductDate = (TextView) itemView.findViewById(R.id.text_ProductDate);
-                text_OrderId = (TextView) itemView.findViewById(R.id.text_OrderId);
-                text_productname = (TextView) itemView.findViewById(R.id.text_productname);
-                text_ProductStatues = (TextView) itemView.findViewById(R.id.text_ProductStatues);
-                text_ProductQty = (TextView) itemView.findViewById(R.id.text_ProductQty);
-                text_Amount = (TextView) itemView.findViewById(R.id.text_Amount);
-                text_PaymentMode = (TextView) itemView.findViewById(R.id.text_PaymentMode);
-                text_DeliveryTo = (TextView) itemView.findViewById(R.id.text_DeliveryTo);
-                text_MobileNo = (TextView) itemView.findViewById(R.id.text_MobileNo);
+                text_ProductDate = itemView.findViewById(R.id.text_ProductDate);
+                text_OrderId = itemView.findViewById(R.id.text_OrderId);
+                text_productname = itemView.findViewById(R.id.text_productname);
+                text_ProductStatues = itemView.findViewById(R.id.text_ProductStatues);
+                text_ProductQty = itemView.findViewById(R.id.text_ProductQty);
+                text_Amount = itemView.findViewById(R.id.text_Amount);
+                text_PaymentMode = itemView.findViewById(R.id.text_PaymentMode);
+                text_DeliveryTo = itemView.findViewById(R.id.text_DeliveryTo);
+                text_MobileNo = itemView.findViewById(R.id.text_MobileNo);
 
 
 
@@ -382,8 +383,8 @@ public class MyOrdersFragment extends Fragment {
     public class ShippedOdderAdapter extends RecyclerView.Adapter<ShippedOdderAdapter.MyViewHolder> implements  Filterable {
 
         private LayoutInflater inflater;
-        private Context context;
-        private List<OrderGetSet> accepetedJobLists;
+        private final Context context;
+        private final List<OrderGetSet> accepetedJobLists;
         private List<OrderGetSet> filteredlist;
         public int cnt;
 
@@ -399,7 +400,7 @@ public class MyOrdersFragment extends Fragment {
         @Override
         public ShippedOdderAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-            View view = inflater.from(parent.getContext()).inflate(R.layout.pendingorder_item_layout, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pendingorder_item_layout, parent, false);
             ShippedOdderAdapter.MyViewHolder holder = new ShippedOdderAdapter.MyViewHolder(view);
             return holder;
         }
@@ -504,26 +505,26 @@ public class MyOrdersFragment extends Fragment {
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                heading_date = (TextView) itemView.findViewById(R.id.heading_date);
-                heading_name = (TextView) itemView.findViewById(R.id.heading_name);
-                heading_orderid = (TextView) itemView.findViewById(R.id.heading_orderid);
-                heading_amount = (TextView) itemView.findViewById(R.id.heading_amount);
-                heading_viewdetails = (RelativeLayout) itemView.findViewById(R.id.heading_viewdetails);
-                headinglayout = (LinearLayout) itemView.findViewById(R.id.headinglayout);
-                detaillayout = (LinearLayout) itemView.findViewById(R.id.detaillayout);
-                changestat_l = (LinearLayout) itemView.findViewById(R.id.changestat_l);
-                selectioncheckbox = (CheckBox) itemView.findViewById(R.id.selectioncheckbox);
+                heading_date = itemView.findViewById(R.id.heading_date);
+                heading_name = itemView.findViewById(R.id.heading_name);
+                heading_orderid = itemView.findViewById(R.id.heading_orderid);
+                heading_amount = itemView.findViewById(R.id.heading_amount);
+                heading_viewdetails = itemView.findViewById(R.id.heading_viewdetails);
+                headinglayout = itemView.findViewById(R.id.headinglayout);
+                detaillayout = itemView.findViewById(R.id.detaillayout);
+                changestat_l = itemView.findViewById(R.id.changestat_l);
+                selectioncheckbox = itemView.findViewById(R.id.selectioncheckbox);
 
 
-                text_ProductDate = (TextView) itemView.findViewById(R.id.text_ProductDate);
-                text_OrderId = (TextView) itemView.findViewById(R.id.text_OrderId);
-                text_productname = (TextView) itemView.findViewById(R.id.text_productname);
-                text_ProductStatues = (TextView) itemView.findViewById(R.id.text_ProductStatues);
-                text_ProductQty = (TextView) itemView.findViewById(R.id.text_ProductQty);
-                text_Amount = (TextView) itemView.findViewById(R.id.text_Amount);
-                text_PaymentMode = (TextView) itemView.findViewById(R.id.text_PaymentMode);
-                text_DeliveryTo = (TextView) itemView.findViewById(R.id.text_DeliveryTo);
-                text_MobileNo = (TextView) itemView.findViewById(R.id.text_MobileNo);
+                text_ProductDate = itemView.findViewById(R.id.text_ProductDate);
+                text_OrderId = itemView.findViewById(R.id.text_OrderId);
+                text_productname = itemView.findViewById(R.id.text_productname);
+                text_ProductStatues = itemView.findViewById(R.id.text_ProductStatues);
+                text_ProductQty = itemView.findViewById(R.id.text_ProductQty);
+                text_Amount = itemView.findViewById(R.id.text_Amount);
+                text_PaymentMode = itemView.findViewById(R.id.text_PaymentMode);
+                text_DeliveryTo = itemView.findViewById(R.id.text_DeliveryTo);
+                text_MobileNo = itemView.findViewById(R.id.text_MobileNo);
 
             }
 
@@ -568,8 +569,8 @@ public class MyOrdersFragment extends Fragment {
     public class PackedOdderAdapter extends RecyclerView.Adapter<PackedOdderAdapter.MyViewHolder> implements Filterable {
 
         private LayoutInflater inflater;
-        private Context context;
-        private List<OrderGetSet> accepetedJobLists;
+        private final Context context;
+        private final List<OrderGetSet> accepetedJobLists;
         private List<OrderGetSet> filteredlist;
         public int cnt;
 
@@ -585,7 +586,7 @@ public class MyOrdersFragment extends Fragment {
         @Override
         public PackedOdderAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-            View view = inflater.from(parent.getContext()).inflate(R.layout.pendingorder_item_layout, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pendingorder_item_layout, parent, false);
             PackedOdderAdapter.MyViewHolder holder = new PackedOdderAdapter.MyViewHolder(view);
             return holder;
         }
@@ -690,26 +691,26 @@ public class MyOrdersFragment extends Fragment {
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                heading_date = (TextView) itemView.findViewById(R.id.heading_date);
-                heading_name = (TextView) itemView.findViewById(R.id.heading_name);
-                heading_orderid = (TextView) itemView.findViewById(R.id.heading_orderid);
-                heading_amount = (TextView) itemView.findViewById(R.id.heading_amount);
-                heading_viewdetails = (RelativeLayout) itemView.findViewById(R.id.heading_viewdetails);
-                headinglayout = (LinearLayout) itemView.findViewById(R.id.headinglayout);
-                detaillayout = (LinearLayout) itemView.findViewById(R.id.detaillayout);
-                changestat_l = (LinearLayout) itemView.findViewById(R.id.changestat_l);
-                selectioncheckbox = (CheckBox) itemView.findViewById(R.id.selectioncheckbox);
+                heading_date = itemView.findViewById(R.id.heading_date);
+                heading_name = itemView.findViewById(R.id.heading_name);
+                heading_orderid = itemView.findViewById(R.id.heading_orderid);
+                heading_amount = itemView.findViewById(R.id.heading_amount);
+                heading_viewdetails = itemView.findViewById(R.id.heading_viewdetails);
+                headinglayout = itemView.findViewById(R.id.headinglayout);
+                detaillayout = itemView.findViewById(R.id.detaillayout);
+                changestat_l = itemView.findViewById(R.id.changestat_l);
+                selectioncheckbox = itemView.findViewById(R.id.selectioncheckbox);
 
 
-                text_ProductDate = (TextView) itemView.findViewById(R.id.text_ProductDate);
-                text_OrderId = (TextView) itemView.findViewById(R.id.text_OrderId);
-                text_productname = (TextView) itemView.findViewById(R.id.text_productname);
-                text_ProductStatues = (TextView) itemView.findViewById(R.id.text_ProductStatues);
-                text_ProductQty = (TextView) itemView.findViewById(R.id.text_ProductQty);
-                text_Amount = (TextView) itemView.findViewById(R.id.text_Amount);
-                text_PaymentMode = (TextView) itemView.findViewById(R.id.text_PaymentMode);
-                text_DeliveryTo = (TextView) itemView.findViewById(R.id.text_DeliveryTo);
-                text_MobileNo = (TextView) itemView.findViewById(R.id.text_MobileNo);
+                text_ProductDate = itemView.findViewById(R.id.text_ProductDate);
+                text_OrderId = itemView.findViewById(R.id.text_OrderId);
+                text_productname = itemView.findViewById(R.id.text_productname);
+                text_ProductStatues = itemView.findViewById(R.id.text_ProductStatues);
+                text_ProductQty = itemView.findViewById(R.id.text_ProductQty);
+                text_Amount = itemView.findViewById(R.id.text_Amount);
+                text_PaymentMode = itemView.findViewById(R.id.text_PaymentMode);
+                text_DeliveryTo = itemView.findViewById(R.id.text_DeliveryTo);
+                text_MobileNo = itemView.findViewById(R.id.text_MobileNo);
 
             }
         }
@@ -947,7 +948,7 @@ public class MyOrdersFragment extends Fragment {
                                         cancelledorderarray.add(new OrderGetSet(expectedDelivery, discountPrice, createdAt, updatedAt, _id, oderedBy, cart_id, orderImg, shippingCharge, totalAmount, seller,
                                                 orderStatus, __v, paymentMethod, paymentStatus, orderedtime, packedtime, shippedtime, name, addressID, contacts, productnames, quantities, "no"));
 
-                                    }else if(orderStatus.equalsIgnoreCase("shipped")) {
+                                    }else if(orderStatus.equalsIgnoreCase("shiped")) {
 
                                         orderarray1.add(new OrderGetSet(expectedDelivery, discountPrice, createdAt, updatedAt, _id, oderedBy, cart_id, orderImg, shippingCharge, totalAmount, seller,
                                                 orderStatus, __v, paymentMethod, paymentStatus, orderedtime, packedtime, shippedtime, name, addressID, contacts, productnames, quantities, "no"));
