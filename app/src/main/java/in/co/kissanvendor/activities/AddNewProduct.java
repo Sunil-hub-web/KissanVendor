@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,6 +40,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.skydoves.colorpickerpreference.ColorEnvelope;
+import com.skydoves.colorpickerpreference.ColorListener;
+import com.skydoves.colorpickerpreference.ColorPickerDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,27 +71,29 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import top.defaults.colorpicker.ColorPickerPopup;
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class AddNewProduct extends AppCompatActivity {
 
     ImageView menu;
     ViewDialog progressbar;
     SessionManager session;
-    TextView addnewproductbtn,priceClc;
-    EditText productname, stock, weight, discount, retailprice, gst, description,servicecharges,
-             commission,totalpayment,dimention,color,quentity;
+    TextView addnewproductbtn, priceClc;
+    EditText productname, stock, weight, discount, retailprice, gst, description, servicecharges,
+            commission, totalpayment, dimention, edit_color, quentity;
     Spinner categories_spinner, producttype_spinner, prodty_spinner, prodty1_spinner, supercategory,
             subcategory_spinner;
     String catname = "", photostr1 = "", photostr2 = "", photostr3 = "", photoselection = "",
             catid = "", subcatcatname = "", subcatcatid = "", typename = "", typeid = "", ttl = "",
-            des = "", sold = "", super_category = "",supercat = "",product_type = "",produ_Type = "";
+            des = "", sold = "", super_category = "", supercat = "", product_type = "", produ_Type = "";
     HashMap<String, String> hashCategories = new HashMap<String, String>();
     ArrayList<String> CategoriesArray = new ArrayList<>();
     HashMap<String, String> hashProducttype = new HashMap<String, String>();
     ArrayList<String> ProducttypeArray = new ArrayList<>();
     ArrayList<String> typeArray = new ArrayList<>();
     ArrayList<String> typeArray1;
-    Map<String,String> type_Array;
+    Map<String, Object> type_Array;
     ArrayList<String> ImageArray = new ArrayList<>();
     ImageView productimage1, productimage2, productimage3;
     private String userChoosenTask;
@@ -112,6 +118,7 @@ public class AddNewProduct extends AppCompatActivity {
     HashMap<String, String> subCategory_List = new HashMap<>();
 
     JSONObject jsonObject_metadata;
+    int mDefaultColor = 0xffffff00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,20 +217,22 @@ public class AddNewProduct extends AppCompatActivity {
         prodty1_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
                 product_type = prodty1_spinner.getItemAtPosition(prodty1_spinner.getSelectedItemPosition()).toString();
+
                 if (product_type.equalsIgnoreCase("Select Product Type")) {
 
                     //Toast.makeText(AddNewProduct.this, "Select Product Type", Toast.LENGTH_SHORT).show();
 
                 } else {
 
-                   Log.d("hshkjbsan",product_type);
+                    Log.d("hshkjbsan", product_type);
 
-                    if(product_type.equalsIgnoreCase("Refundable")){
+                    if (product_type.equalsIgnoreCase("Refundable")) {
 
                         bool_productType = true;
 
-                    }else{
+                    } else {
 
                         bool_productType = false;
                     }
@@ -247,11 +256,11 @@ public class AddNewProduct extends AppCompatActivity {
 
                 super_category = supercategory.getItemAtPosition(supercategory.getSelectedItemPosition()).toString();
 
-                if(super_category.equalsIgnoreCase("Select SuperCategory")){
+                if (super_category.equalsIgnoreCase("Select SuperCategory")) {
 
                     supercat = "";
 
-                }else{
+                } else {
 
                     supercat = super_CategoryList.get(super_category);
 
@@ -299,11 +308,11 @@ public class AddNewProduct extends AppCompatActivity {
                     retailprice.setError("enter product retail price");
                     retailprice.requestFocus();
 
-                }else if (discount.getText().toString().trim().length() == 0) {
+                } else if (discount.getText().toString().trim().length() == 0) {
                     discount.setError("enter discount price");
                     discount.requestFocus();
 
-                }else{
+                } else {
 
                     String str_gst = gst.getText().toString().trim();
                     String str_servicecharges = servicecharges.getText().toString().trim();
@@ -325,13 +334,13 @@ public class AddNewProduct extends AppCompatActivity {
                     pricetot = tot_pric + gst + commi + coservic;
 
                     DecimalFormat df = new DecimalFormat("#.##");
-                    String pricetot1 =  df.format(pricetot);
+                    String pricetot1 = df.format(pricetot);
 
-                    Log.d("ghghgh",String.valueOf(pricetot1));
+                    Log.d("ghghgh", String.valueOf(pricetot1));
 
                     totalpayment.setText(pricetot1);
 
-                   // priceClculator(int_VenderPrice,int_Discount,0,int_commission,int_servicecharges,int_gst);
+                    // priceClculator(int_VenderPrice,int_Discount,0,int_commission,int_servicecharges,int_gst);
 
 
                 }
@@ -386,7 +395,7 @@ public class AddNewProduct extends AppCompatActivity {
 
                     Toast.makeText(AddNewProduct.this, "Select Product Type", Toast.LENGTH_SHORT).show();
 
-                }else if (totalpayment.getText().toString().trim().length() == 0) {
+                } else if (totalpayment.getText().toString().trim().length() == 0) {
 
                     Toast.makeText(AddNewProduct.this, "Please select total price", Toast.LENGTH_SHORT).show();
 
@@ -401,16 +410,14 @@ public class AddNewProduct extends AppCompatActivity {
                     exp = 0;
                     wt = Integer.parseInt(weight.getText().toString());
 
-                    String str_quentity = quentity.getText().toString().trim();
-                    int int_quentity = Integer.parseInt(str_quentity);
                     String str_dimention = dimention.getText().toString().trim();
-                    String str_color = color.getText().toString().trim();
+                    String str_color = edit_color.getText().toString().trim();
 
                     jsonObject_metadata = new JSONObject();
                     try {
-                        jsonObject_metadata.put("color",str_color);
-                        jsonObject_metadata.put("dimension",str_dimention);
-                        jsonObject_metadata.put("quantity",int_quentity);
+                        jsonObject_metadata.put("color", str_color);
+                        jsonObject_metadata.put("dimension", str_dimention);
+                        jsonObject_metadata.put("quantity", stok);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -437,8 +444,8 @@ public class AddNewProduct extends AppCompatActivity {
         typeArray1.add("Non-Refundable");
 
         type_Array = new HashMap<>();
-        type_Array.put("Refundable","true");
-        type_Array.put("Non-Refundable","false");
+        type_Array.put("Refundable", "true");
+        type_Array.put("Non-Refundable", "false");
 
         ArrayAdapter<String> typVehicle1 = new ArrayAdapter<String>(AddNewProduct.this,
                 R.layout.spinnerfront2, typeArray1);
@@ -448,6 +455,16 @@ public class AddNewProduct extends AppCompatActivity {
         //GetCategories();
 
         getsuperCatecory();
+
+        edit_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               // colorPicker(view);
+
+                openDialog(true);
+            }
+        });
     }
 
     public void InIt() {
@@ -474,7 +491,7 @@ public class AddNewProduct extends AppCompatActivity {
         commission = findViewById(R.id.commission);
         totalpayment = findViewById(R.id.totalpayment);
         dimention = findViewById(R.id.dimention);
-        color = findViewById(R.id.color);
+        edit_color = findViewById(R.id.color);
         quentity = findViewById(R.id.quentity);
 
     }
@@ -996,7 +1013,7 @@ public class AddNewProduct extends AppCompatActivity {
 
         String url = ServerLinks.getSupercategory;
 
-        Log.d("dssjhbjh",url);
+        Log.d("dssjhbjh", url);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, ServerLinks.getSupercategory, new Response.Listener<String>() {
             @Override
@@ -1080,7 +1097,7 @@ public class AddNewProduct extends AppCompatActivity {
                 }
 
             }
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -1105,14 +1122,14 @@ public class AddNewProduct extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void getCategory(String supercategoryId){
+    public void getCategory(String supercategoryId) {
 
         progressbar.showDialog();
 
         categoryList = new ArrayList<>();
         category_List = new HashMap<>();
 
-        String category = ServerLinks.getCategory+supercategoryId;
+        String category = ServerLinks.getCategory + supercategoryId;
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, category, new Response.Listener<String>() {
@@ -1198,7 +1215,7 @@ public class AddNewProduct extends AppCompatActivity {
                 }
 
             }
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -1222,14 +1239,14 @@ public class AddNewProduct extends AppCompatActivity {
 
     }
 
-    public void getSubCategory(String subCategoryId){
+    public void getSubCategory(String subCategoryId) {
 
         progressbar.showDialog();
 
         subcCategoryList = new ArrayList<>();
         subCategory_List = new HashMap<>();
 
-        String category = ServerLinks.getSubCategory+subCategoryId;
+        String category = ServerLinks.getSubCategory + subCategoryId;
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, category, new Response.Listener<String>() {
@@ -1265,7 +1282,7 @@ public class AddNewProduct extends AppCompatActivity {
                             subCategory_List.put(name, _id);
 
                         }
-                        subcCategoryList.add(0,"select SubCategory");
+                        subcCategoryList.add(0, "select SubCategory");
 
                         ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
                                 R.layout.spinnerfront2, subcCategoryList);
@@ -1315,7 +1332,7 @@ public class AddNewProduct extends AppCompatActivity {
                 }
 
             }
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -1339,18 +1356,18 @@ public class AddNewProduct extends AppCompatActivity {
 
     }
 
-    public void priceClculator(int priceByVendor,int discount,int refundCharge,int commission,int serviceCharge,int gst){
+    public void priceClculator(int priceByVendor, int discount, int refundCharge, int commission, int serviceCharge, int gst) {
 
         JSONObject jsonObject = new JSONObject();
 
         try {
 
-            jsonObject.put("priceByVendor",priceByVendor);
-            jsonObject.put("discount",discount);
-            jsonObject.put("refundCharge",refundCharge);
-            jsonObject.put("commission",commission);
-            jsonObject.put("serviceCharge",serviceCharge);
-            jsonObject.put("gst",gst);
+            jsonObject.put("priceByVendor", priceByVendor);
+            jsonObject.put("discount", discount);
+            jsonObject.put("refundCharge", refundCharge);
+            jsonObject.put("commission", commission);
+            jsonObject.put("serviceCharge", serviceCharge);
+            jsonObject.put("gst", gst);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1367,11 +1384,11 @@ public class AddNewProduct extends AppCompatActivity {
                     String msg = response.getString("msg");
                     String amountPaidByUser = response.getString("amountPaidByUser");
 
-                    if(code.equals("200")){
+                    if (code.equals("200")) {
 
                         totalpayment.setText(amountPaidByUser);
 
-                    }else{
+                    } else {
 
                         Toast.makeText(AddNewProduct.this, msg, Toast.LENGTH_SHORT).show();
                     }
@@ -1411,7 +1428,7 @@ public class AddNewProduct extends AppCompatActivity {
 
                 }
             }
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -1434,6 +1451,52 @@ public class AddNewProduct extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(AddNewProduct.this);
         requestQueue.add(jsonObjectRequest);
 
+    }
+
+   /* public void colorPicker(View v) {
+
+        new ColorPickerPopup.Builder(AddNewProduct.this).initialColor(
+                        Color.RED)
+                .enableBrightness(true)
+                .enableAlpha(true)
+                .okTitle("Choose")
+                .cancelTitle("Cancel")
+                .showIndicator(true)
+                .showValue(true)
+                .build()
+                .show(v,new ColorPickerPopup.ColorPickerObserver() {
+                            @Override
+                            public void
+                            onColorPicked(int color) {
+                                mDefaultColor = color;
+                                Toast.makeText(AddNewProduct.this, ""+mDefaultColor, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+    }*/
+
+    void openDialog(boolean supportsAlpha) {
+        AmbilWarnaDialog dialog = new AmbilWarnaDialog(AddNewProduct.this, mDefaultColor, supportsAlpha, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                AddNewProduct.this.mDefaultColor = color;
+                displayColor(color);
+            }
+
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+                Toast.makeText(getApplicationContext(), "cancel", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show();
+    }
+
+    void displayColor(int color) {
+
+        //String hexColor = Integer.toHexString(color).substring(2);
+        String hexColor = String.format("#%06X", (0xFFFFFF & color));
+      //  Toast.makeText(AddNewProduct.this, "#"+hexColor, Toast.LENGTH_SHORT).show();
+        edit_color.setText(hexColor);
     }
 }
 

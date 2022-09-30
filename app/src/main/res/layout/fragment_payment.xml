@@ -47,21 +47,20 @@
 
 
             <TextView
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/frame_23"
-                android:layout_width="@dimen/ninety"
+                android:layout_width="@dimen/hundred_twenty"
                 android:layout_height="@dimen/forty"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:gravity="center"
-                android:textAppearance="@style/add_money"
-                android:text="Add Money"
                 android:background="@drawable/frame_23"
-                />
+                android:gravity="center"
+                android:text="Payment Info"
+                android:textAllCaps="true"
+                android:textAppearance="@style/add_money" />
 
         </RelativeLayout>
 
-        <RelativeLayout
+      <!--  <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -81,17 +80,16 @@
                 android:id="@+id/today_"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/five"
                 android:layout_marginRight="@dimen/twenty_five"
-                android:text="@string/tod"
-                android:textAppearance="@style/today_"
                 android:gravity="top"
-                />
+                android:text="@string/tod"
+                android:textAppearance="@style/today_" />
 
 
-        </RelativeLayout>
+        </RelativeLayout>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/payment_recycler"

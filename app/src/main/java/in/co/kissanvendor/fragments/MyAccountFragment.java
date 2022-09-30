@@ -50,8 +50,8 @@ public class MyAccountFragment extends Fragment {
     TextView username_heading;
     ImageView edit, save_btn;
     EditText name_ed, mobilenumber_ed, email_ed, bankname_ed, accountnumber_ed, ifsccode_ed, state_ed,
-            city_ed, street_ed, zipcode_ed;
-    String nm, mob, eml, bnknm, ifsc, stat, cty, strt ;
+            city_ed, street_ed, zipcode_ed,shopName_ed,pannumber_ed,gstnumber_ed,address_ed,locality_ed;
+    String nm, mob, eml, bnknm, ifsc, stat, cty, strt , shop,pan,gst,address,loca;
     long acnnm, zip;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -60,8 +60,6 @@ public class MyAccountFragment extends Fragment {
 
         session = new SessionManager(getActivity());
         progressbar = new ViewDialog(getActivity());
-
-
 
         Init(v);
         GetProfileData();
@@ -73,6 +71,11 @@ public class MyAccountFragment extends Fragment {
         username_heading = v.findViewById(R.id.username_heading);
 
         name_ed = v.findViewById(R.id.name_ed);
+        shopName_ed = v.findViewById(R.id.shopName_ed);
+        pannumber_ed = v.findViewById(R.id.pannumber_ed);
+        gstnumber_ed = v.findViewById(R.id.gstnumber_ed);
+        address_ed = v.findViewById(R.id.address_ed);
+        locality_ed = v.findViewById(R.id.locality_ed);
         mobilenumber_ed = v.findViewById(R.id.mobilenumber_ed);
         email_ed = v.findViewById(R.id.email_ed);
         bankname_ed = v.findViewById(R.id.bankname_ed);
@@ -99,6 +102,11 @@ public class MyAccountFragment extends Fragment {
                 city_ed.setEnabled(true);
                 street_ed.setEnabled(true);
                 zipcode_ed.setEnabled(true);
+                shopName_ed.setEnabled(true);
+                address_ed.setEnabled(true);
+                pannumber_ed.setEnabled(true);
+                gstnumber_ed.setEnabled(true);
+                locality_ed.setEnabled(true);
 
                 name_ed.requestFocus();
 
@@ -218,17 +226,18 @@ public class MyAccountFragment extends Fragment {
                     stat = state_ed.getText().toString();
                     cty = city_ed.getText().toString();
                     strt = street_ed.getText().toString();
+                    shop = shopName_ed.getText().toString();
+                    pan = pannumber_ed.getText().toString();
+                    gst = gstnumber_ed.getText().toString();
+                    address = address_ed.getText().toString();
+                    loca = locality_ed.getText().toString();
                     zip = Long.parseLong(zipcode_ed.getText().toString());
-
 
                     updateProfile();
                 }
 
             }
         });
-
-
-
 
     }
 
@@ -255,6 +264,9 @@ public class MyAccountFragment extends Fragment {
                                 String emailVerified = vendorDetails.getString("emailVerified");
                                 String name = vendorDetails.getString("name");
                                 String _id = vendorDetails.getString("_id");
+                                String shopname = vendorDetails.getString("shopname");
+                                String gstNumber = vendorDetails.getString("gstNumber");
+                                String panNumber = vendorDetails.getString("panNumber");
 
                                 JSONObject location = vendorDetails.getJSONObject("location");
                                 String address = location.getString("address");
@@ -291,6 +303,11 @@ public class MyAccountFragment extends Fragment {
                                 state_ed.setText(state);
                                 city_ed.setText(city);
                                 street_ed.setText(street);
+                                address_ed.setText(address);
+                                locality_ed.setText(locality);
+                                shopName_ed.setText(shopname);
+                                gstnumber_ed.setText(gstNumber);
+                                pannumber_ed.setText(panNumber);
 
                                 if(zip.equalsIgnoreCase("null")){
 
@@ -374,13 +391,23 @@ public class MyAccountFragment extends Fragment {
             paramjson.put("name", nm);
             paramjson.put("mobile", mob);
             paramjson.put("emailID", eml);
-            paramjson.put("bankName", bnknm);
-            paramjson.put("accountNum", acnnm);
-            paramjson.put("ifsc", ifsc);
-            paramjson.put("state", stat);
-            paramjson.put("city", cty);
+            paramjson.put("shopname", shop);
+            paramjson.put("IsWholeSaler", true);
+            paramjson.put("panImage", "");
+            paramjson.put("panNumber", pan);
+            paramjson.put("address", address);
             paramjson.put("street", strt);
+            paramjson.put("locality", loca);
+            paramjson.put("city", cty);
+            paramjson.put("state", stat);
             paramjson.put("zip", zip);
+            paramjson.put("billingDetails_email", eml);
+            paramjson.put("gstImage", "");
+            paramjson.put("gstNumber", gst);
+            paramjson.put("bankName", bnknm);
+            paramjson.put("accountNumber", acnnm);
+            paramjson.put("ifscCode", ifsc);
+
 
             Log.d("successresponceVolley", "" + paramjson);
         } catch (JSONException e) {
@@ -498,7 +525,9 @@ public class MyAccountFragment extends Fragment {
 
         return matcher.matches ( );
 
-    } public boolean isValidIfcCode(final String ifsccode) {
+    }
+
+    public boolean isValidIfcCode(final String ifsccode) {
 
         Pattern pattern;
         Matcher matcher;

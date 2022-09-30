@@ -56,4 +56,10 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
 
     implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'com.github.skydoves:colorpickerpreference:1.0.2'
+
+    implementation 'com.github.duanhong169:colorpicker:1.1.6'
+
+    implementation 'com.github.yukuku:ambilwarna:2.0.1'
 }

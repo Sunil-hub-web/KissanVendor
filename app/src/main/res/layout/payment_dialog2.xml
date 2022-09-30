@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/twenty"
+                android:layout_height="@dimen/thirty"
+                android:src="@drawable/close"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/thirty">
+
+            </ImageView>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/thirty"
+                android:layout_marginRight="@dimen/thirty"
+                android:text="Waiting"
+                android:textAppearance="@style/welcome_bac"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/thirty"
+                android:layout_marginRight="@dimen/twenty_five"
+                android:text="Please wait till 12,Aug to tranfer your \n amount"
+                android:textAppearance="@style/or"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/fifteen"/>
+
+            <TextView
+                android:id="@+id/text_withdraw"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fifty"
+                android:layout_marginTop="@dimen/fifteen"
+                android:layout_marginLeft="@dimen/thirty"
+                android:layout_marginRight="@dimen/thirty"
+                android:background="@drawable/rectangle_3"
+                android:text="Withdraw amount"
+                android:gravity="center"
+                android:textSize="@dimen/twenty"
+                android:layout_marginBottom="@dimen/twenty"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

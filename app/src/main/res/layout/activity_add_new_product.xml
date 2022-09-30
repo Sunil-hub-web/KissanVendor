@@ -300,11 +300,15 @@
                         android:layout_marginRight="@dimen/five"
                         android:background="@drawable/rectangle_3"
                         android:paddingLeft="@dimen/fifteen"
-                        android:paddingRight="@dimen/fifteen" />
+                        android:paddingRight="@dimen/fifteen"
+                        android:cursorVisible="false"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:textIsSelectable="false"/>
 
                 </LinearLayout>
 
-                <LinearLayout
+            <!--    <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -330,7 +334,7 @@
                         android:paddingLeft="@dimen/fifteen"
                         android:paddingRight="@dimen/fifteen" />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
             </LinearLayout>
 

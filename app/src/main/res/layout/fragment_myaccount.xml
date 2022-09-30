@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:scrollbars="none"
-    android:isScrollContainer="true"
     android:background="@color/white"
+    android:isScrollContainer="true"
+    android:scrollbars="none"
     tools:context=".fragments.MyAccountFragment">
 
     <LinearLayout
@@ -42,7 +42,7 @@
                             android:id="@+id/profile_image"
                             android:layout_width="@dimen/eighty"
                             android:layout_height="@dimen/eighty"
-                            android:src="@drawable/finallogo"/>
+                            android:src="@drawable/finallogo" />
 
 
                     </LinearLayout>
@@ -83,8 +83,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="@dimen/sixty"
                 android:layout_height="@dimen/sixty"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginRight="@dimen/fifteen"
                 app:cardCornerRadius="@dimen/thirty">
 
@@ -99,8 +99,8 @@
                         android:layout_height="match_parent"
                         android:contentDescription="@string/nav_header_desc"
                         android:padding="@dimen/fifteen"
-                        app:tint="@color/colorPrimary"
-                        app:srcCompat="@drawable/edit_icon" />
+                        app:srcCompat="@drawable/edit_icon"
+                        app:tint="@color/colorPrimary" />
 
                     <ImageView
                         android:id="@+id/save_btn"
@@ -108,9 +108,9 @@
                         android:layout_height="match_parent"
                         android:contentDescription="@string/nav_header_desc"
                         android:padding="@dimen/fifteen"
-                        app:tint="@color/colorPrimary"
                         android:visibility="gone"
-                        app:srcCompat="@drawable/proff_save_btn" />
+                        app:srcCompat="@drawable/proff_save_btn"
+                        app:tint="@color/colorPrimary" />
 
 
                 </LinearLayout>
@@ -129,8 +129,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
-                android:fontFamily="@font/poppins_bold"
                 android:layout_marginLeft="@dimen/twenty"
+                android:fontFamily="@font/poppins_bold"
                 android:gravity="top"
                 android:text="@string/my_details"
                 android:textAppearance="@style/my_details" />
@@ -138,10 +138,10 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/one"
-                android:background="#7D353535"
-                android:layout_toRightOf="@+id/my_details"
                 android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/ten"/>
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_toRightOf="@+id/my_details"
+                android:background="#7D353535" />
 
         </RelativeLayout>
 
@@ -150,12 +150,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/twenty"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/twenty"
             android:layout_marginTop="@dimen/ten"
+            android:gravity="top"
             android:text="@string/personal_in"
-            android:textAppearance="@style/personal_in"
-            android:gravity="top"/>
+            android:textAppearance="@style/personal_in" />
 
         <TextView
             android:id="@+id/name"
@@ -164,50 +164,52 @@
             android:layout_marginLeft="@dimen/twenty"
             android:layout_marginTop="@dimen/ten"
             android:fontFamily="@font/poppins_bold"
+            android:gravity="top"
             android:text="@string/name"
-            android:textAppearance="@style/name"
-            android:gravity="top" />
+            android:textAppearance="@style/name" />
+
         <EditText
             android:id="@+id/name_ed"
             android:layout_width="match_parent"
             android:layout_height="@dimen/forty"
+            android:layout_marginLeft="@dimen/twenty"
             android:layout_marginTop="@dimen/four"
+            android:layout_marginRight="@dimen/twenty"
             android:background="@drawable/rectangle_3"
+            android:enabled="false"
             android:fontFamily="@font/raleway"
+            android:inputType="textPersonName"
+            android:maxLines="1"
             android:paddingLeft="@dimen/fifteen"
             android:paddingRight="@dimen/fifteen"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:inputType="textPersonName"
-            android:enabled="false"
-            android:layout_marginLeft="@dimen/twenty"
-            android:layout_marginRight="@dimen/twenty"/>
+            android:singleLine="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/twenty"
-            android:fontFamily="@font/poppins_bold"
             android:layout_marginTop="@dimen/five"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="top"
             android:text="@string/mobile"
-            android:textAppearance="@style/name"
-            android:gravity="top" />
+            android:textAppearance="@style/name" />
+
         <EditText
             android:id="@+id/mobilenumber_ed"
             android:layout_width="match_parent"
             android:layout_height="@dimen/forty"
+            android:layout_marginLeft="@dimen/twenty"
             android:layout_marginTop="@dimen/four"
+            android:layout_marginRight="@dimen/twenty"
             android:background="@drawable/rectangle_3"
-            android:paddingLeft="@dimen/fifteen"
+            android:enabled="true"
             android:fontFamily="@font/raleway"
             android:inputType="phone"
             android:maxLength="10"
             android:maxLines="1"
-            android:singleLine="true"
-            android:enabled="true"
+            android:paddingLeft="@dimen/fifteen"
             android:paddingRight="@dimen/fifteen"
-            android:layout_marginLeft="@dimen/twenty"
-            android:layout_marginRight="@dimen/twenty"/>
+            android:singleLine="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -215,60 +217,136 @@
             android:layout_marginLeft="@dimen/twenty"
             android:layout_marginTop="@dimen/five"
             android:fontFamily="@font/poppins_bold"
+            android:gravity="top"
             android:text="@string/e_mail"
-            android:textAppearance="@style/name"
-            android:gravity="top" />
+            android:textAppearance="@style/name" />
+
         <EditText
             android:id="@+id/email_ed"
             android:layout_width="match_parent"
             android:layout_height="@dimen/forty"
-            android:layout_marginTop="@dimen/four"
-            android:background="@drawable/rectangle_3"
-            android:paddingLeft="@dimen/fifteen"
-            android:inputType="textEmailAddress"
-            android:enabled="false"
-            android:paddingRight="@dimen/fifteen"
-            android:maxLines="1"
-            android:singleLine="true"
             android:layout_marginLeft="@dimen/twenty"
-            android:layout_marginRight="@dimen/twenty"/>
+            android:layout_marginTop="@dimen/four"
+            android:layout_marginRight="@dimen/twenty"
+            android:background="@drawable/rectangle_3"
+            android:enabled="false"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/fifteen"
+            android:paddingRight="@dimen/fifteen"
+            android:singleLine="true" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginTop="@dimen/five"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="top"
+            android:text="Shop Name"
+            android:textAppearance="@style/name" />
+
+        <EditText
+            android:id="@+id/shopName_ed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/forty"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginTop="@dimen/four"
+            android:layout_marginRight="@dimen/twenty"
+            android:background="@drawable/rectangle_3"
+            android:enabled="false"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/fifteen"
+            android:paddingRight="@dimen/fifteen"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginTop="@dimen/five"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="top"
+            android:text="Pan number"
+            android:textAppearance="@style/name" />
+
+        <EditText
+            android:id="@+id/pannumber_ed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/forty"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginTop="@dimen/four"
+            android:layout_marginRight="@dimen/twenty"
+            android:background="@drawable/rectangle_3"
+            android:enabled="false"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/fifteen"
+            android:paddingRight="@dimen/fifteen"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginTop="@dimen/five"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="top"
+            android:text="Gst Number"
+            android:textAppearance="@style/name" />
+
+        <EditText
+            android:id="@+id/gstnumber_ed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/forty"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginTop="@dimen/four"
+            android:layout_marginRight="@dimen/twenty"
+            android:background="@drawable/rectangle_3"
+            android:enabled="false"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/fifteen"
+            android:paddingRight="@dimen/fifteen"
+            android:singleLine="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/twenty"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/twenty"
             android:layout_marginTop="@dimen/fifteen"
+            android:gravity="top"
             android:text="@string/account_det"
-            android:textAppearance="@style/personal_in"
-            android:gravity="top"/>
+            android:textAppearance="@style/personal_in" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/twenty"
             android:layout_marginTop="@dimen/ten"
-            android:text="@string/bank_name"
-            android:textAppearance="@style/name"
             android:fontFamily="@font/poppins_bold"
-            android:gravity="top" />
+            android:gravity="top"
+            android:text="@string/bank_name"
+            android:textAppearance="@style/name" />
+
         <EditText
             android:id="@+id/bankname_ed"
             android:layout_width="match_parent"
             android:layout_height="@dimen/forty"
+            android:layout_marginLeft="@dimen/twenty"
             android:layout_marginTop="@dimen/four"
+            android:layout_marginRight="@dimen/twenty"
             android:background="@drawable/rectangle_3"
-            android:paddingLeft="@dimen/fifteen"
             android:enabled="false"
+            android:fontFamily="@font/raleway"
             android:inputType="textPersonName"
             android:maxLines="1"
-            android:singleLine="true"
-            android:fontFamily="@font/raleway"
+            android:paddingLeft="@dimen/fifteen"
             android:paddingRight="@dimen/fifteen"
-            android:layout_marginLeft="@dimen/twenty"
-            android:layout_marginRight="@dimen/twenty"/>
+            android:singleLine="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -278,40 +356,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/three"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginRight="@dimen/three">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/twenty"
-                    android:layout_marginTop="@dimen/ten"
-                    android:text="@string/account_no"
-                    android:fontFamily="@font/poppins_bold"
-                    android:textAppearance="@style/name"
-                    android:gravity="top" />
-                <EditText
-                    android:id="@+id/accountnumber_ed"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/forty"
-                    android:layout_marginTop="@dimen/four"
-                    android:background="@drawable/rectangle_3"
-                    android:paddingLeft="@dimen/fifteen"
-                    android:enabled="false"
-                    android:paddingRight="@dimen/fifteen"
-                    android:inputType="number"
-                    android:fontFamily="@font/raleway"
-                    android:layout_marginLeft="@dimen/twenty"
-                    android:layout_marginRight="@dimen/three"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="@dimen/three"
                 android:orientation="vertical">
 
                 <TextView
@@ -320,39 +366,72 @@
                     android:layout_marginLeft="@dimen/twenty"
                     android:layout_marginTop="@dimen/ten"
                     android:fontFamily="@font/poppins_bold"
+                    android:gravity="top"
+                    android:text="@string/account_no"
+                    android:textAppearance="@style/name" />
+
+                <EditText
+                    android:id="@+id/accountnumber_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/four"
+                    android:layout_marginRight="@dimen/three"
+                    android:background="@drawable/rectangle_3"
+                    android:enabled="false"
+                    android:fontFamily="@font/raleway"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:paddingRight="@dimen/fifteen" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/three"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="top"
                     android:text="@string/ifsc"
-                    android:textAppearance="@style/name"
-                    android:gravity="top" />
+                    android:textAppearance="@style/name" />
+
                 <EditText
                     android:id="@+id/ifsccode_ed"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/forty"
-                    android:layout_marginTop="@dimen/four"
-                    android:enabled="false"
-                    android:background="@drawable/rectangle_3"
-                    android:paddingLeft="@dimen/fifteen"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:fontFamily="@font/raleway"
-                    android:paddingRight="@dimen/fifteen"
                     android:layout_marginLeft="@dimen/three"
-                    android:layout_marginRight="@dimen/twenty"/>
+                    android:layout_marginTop="@dimen/four"
+                    android:layout_marginRight="@dimen/twenty"
+                    android:background="@drawable/rectangle_3"
+                    android:enabled="false"
+                    android:fontFamily="@font/raleway"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:paddingRight="@dimen/fifteen"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
         </LinearLayout>
-
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/twenty"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/twenty"
             android:layout_marginTop="@dimen/fifteen"
+            android:gravity="top"
             android:text="@string/location_details"
-            android:textAppearance="@style/personal_in"
-            android:gravity="top"/>
+            android:textAppearance="@style/personal_in" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -362,41 +441,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/three"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginRight="@dimen/three">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/twenty"
-                    android:layout_marginTop="@dimen/ten"
-                    android:text="@string/state"
-                    android:fontFamily="@font/poppins_bold"
-                    android:textAppearance="@style/name"
-                    android:gravity="top" />
-                <EditText
-                    android:id="@+id/state_ed"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/forty"
-                    android:layout_marginTop="@dimen/four"
-                    android:enabled="false"
-                    android:background="@drawable/rectangle_3"
-                    android:paddingLeft="@dimen/fifteen"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:fontFamily="@font/raleway"
-                    android:paddingRight="@dimen/fifteen"
-                    android:layout_marginLeft="@dimen/twenty"
-                    android:layout_marginRight="@dimen/three"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="@dimen/three"
                 android:orientation="vertical">
 
                 <TextView
@@ -404,24 +450,59 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/twenty"
                     android:layout_marginTop="@dimen/ten"
-                    android:text="@string/city"
                     android:fontFamily="@font/poppins_bold"
-                    android:textAppearance="@style/name"
-                    android:gravity="top" />
+                    android:gravity="top"
+                    android:text="Address"
+                    android:textAppearance="@style/name" />
+
                 <EditText
-                    android:id="@+id/city_ed"
+                    android:id="@+id/address_ed"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/forty"
+                    android:layout_marginLeft="@dimen/twenty"
                     android:layout_marginTop="@dimen/four"
-                    android:enabled="false"
+                    android:layout_marginRight="@dimen/three"
                     android:background="@drawable/rectangle_3"
-                    android:paddingLeft="@dimen/fifteen"
+                    android:enabled="false"
                     android:fontFamily="@font/raleway"
                     android:maxLines="1"
-                    android:singleLine="true"
+                    android:paddingLeft="@dimen/fifteen"
                     android:paddingRight="@dimen/fifteen"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/three"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="top"
+                    android:text="Locality"
+                    android:textAppearance="@style/name" />
+
+                <EditText
+                    android:id="@+id/locality_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
                     android:layout_marginLeft="@dimen/three"
-                    android:layout_marginRight="@dimen/twenty"/>
+                    android:layout_marginTop="@dimen/four"
+                    android:layout_marginRight="@dimen/twenty"
+                    android:background="@drawable/rectangle_3"
+                    android:enabled="false"
+                    android:fontFamily="@font/raleway"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:paddingRight="@dimen/fifteen"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -430,15 +511,90 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/twenty_five">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/three"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginRight="@dimen/three">
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="top"
+                    android:text="@string/state"
+                    android:textAppearance="@style/name" />
+
+                <EditText
+                    android:id="@+id/state_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/four"
+                    android:layout_marginRight="@dimen/three"
+                    android:background="@drawable/rectangle_3"
+                    android:enabled="false"
+                    android:fontFamily="@font/raleway"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:paddingRight="@dimen/fifteen"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/three"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="top"
+                    android:text="@string/city"
+                    android:textAppearance="@style/name" />
+
+                <EditText
+                    android:id="@+id/city_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginLeft="@dimen/three"
+                    android:layout_marginTop="@dimen/four"
+                    android:layout_marginRight="@dimen/twenty"
+                    android:background="@drawable/rectangle_3"
+                    android:enabled="false"
+                    android:fontFamily="@font/raleway"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:paddingRight="@dimen/fifteen"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/twenty_five"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/three"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -449,28 +605,29 @@
                     android:gravity="top"
                     android:text="@string/street"
                     android:textAppearance="@style/name" />
+
                 <EditText
                     android:id="@+id/street_ed"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/forty"
-                    android:layout_marginTop="@dimen/four"
-                    android:enabled="false"
-                    android:background="@drawable/rectangle_3"
-                    android:paddingLeft="@dimen/fifteen"
-                    android:fontFamily="@font/raleway"
-                    android:paddingRight="@dimen/fifteen"
-                    android:maxLines="1"
-                    android:singleLine="true"
                     android:layout_marginLeft="@dimen/twenty"
-                    android:layout_marginRight="@dimen/three"/>
+                    android:layout_marginTop="@dimen/four"
+                    android:layout_marginRight="@dimen/three"
+                    android:background="@drawable/rectangle_3"
+                    android:enabled="false"
+                    android:fontFamily="@font/raleway"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:paddingRight="@dimen/fifteen"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="@dimen/three"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -478,26 +635,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/twenty"
                     android:layout_marginTop="@dimen/ten"
-                    android:text="@string/zipcode"
                     android:fontFamily="@font/poppins_bold"
-                    android:textAppearance="@style/name"
-                    android:gravity="top" />
+                    android:gravity="top"
+                    android:text="@string/zipcode"
+                    android:textAppearance="@style/name" />
+
                 <EditText
                     android:id="@+id/zipcode_ed"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/forty"
+                    android:layout_marginLeft="@dimen/three"
                     android:layout_marginTop="@dimen/four"
-                    android:enabled="false"
+                    android:layout_marginRight="@dimen/twenty"
                     android:background="@drawable/rectangle_3"
+                    android:enabled="false"
+                    android:fontFamily="@font/raleway"
                     android:inputType="number"
                     android:maxLength="6"
-                    android:paddingLeft="@dimen/fifteen"
                     android:maxLines="1"
-                    android:singleLine="true"
+                    android:paddingLeft="@dimen/fifteen"
                     android:paddingRight="@dimen/fifteen"
-                    android:fontFamily="@font/raleway"
-                    android:layout_marginLeft="@dimen/three"
-                    android:layout_marginRight="@dimen/twenty"/>
+                    android:singleLine="true" />
 
             </LinearLayout>
 
