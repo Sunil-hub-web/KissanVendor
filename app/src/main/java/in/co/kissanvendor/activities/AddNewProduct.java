@@ -148,6 +148,8 @@ public class AddNewProduct extends AppCompatActivity {
                 catname = categories_spinner.getItemAtPosition(categories_spinner.getSelectedItemPosition()).toString();
                 if (catname.equalsIgnoreCase("Select Category")) {
 
+                    catid = "";
+
                 } else {
 
                     //subcatcatname = "";
@@ -1191,7 +1193,7 @@ public class AddNewProduct extends AppCompatActivity {
 
                         }else{
 
-                            categoryList.add(0, "Select Category");
+                           // categoryList.add(0, "Select Category");
 
                             ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
                                     R.layout.spinnerfront2, categoryList);
@@ -1206,7 +1208,7 @@ public class AddNewProduct extends AppCompatActivity {
 
                     } else {
 
-                        categoryList.add(0, "Select Category");
+                        //categoryList.add(0, "Select Category");
 
                         ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
                                 R.layout.spinnerfront2, categoryList);
@@ -1344,7 +1346,7 @@ public class AddNewProduct extends AppCompatActivity {
                             String message = jsonObject.getString("msg");
                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-                            subcCategoryList.add(0, "select SubCategory");
+                           // subcCategoryList.add(0, "select SubCategory");
 
                             ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
                                     R.layout.spinnerfront2, subcCategoryList);
@@ -1357,7 +1359,7 @@ public class AddNewProduct extends AppCompatActivity {
                         String message = jsonObject.getString("msg");
                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-                        subcCategoryList.add(0, "select SubCategory");
+                        //subcCategoryList.add(0, "select SubCategory");
 
                         ArrayAdapter<String> dataAdapterVehicle = new ArrayAdapter<String>(AddNewProduct.this,
                                 R.layout.spinnerfront2, subcCategoryList);
