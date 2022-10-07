@@ -494,7 +494,6 @@
                         android:layout_marginRight="@dimen/twenty"
                         android:background="@drawable/rectangle_3"
                         android:paddingLeft="@dimen/fifteen"
-                        android:text="18"
                         android:enabled="false"
                         android:paddingRight="@dimen/fifteen" />
 
@@ -532,7 +531,6 @@
                         android:layout_marginTop="@dimen/four"
                         android:background="@drawable/rectangle_3"
                         android:paddingLeft="@dimen/fifteen"
-                        android:text="1"
                         android:enabled="false"
                         android:paddingRight="@dimen/fifteen" />
 
@@ -564,7 +562,6 @@
                         android:layout_marginRight="@dimen/ten"
                         android:background="@drawable/rectangle_3"
                         android:paddingLeft="@dimen/fifteen"
-                        android:text="5"
                         android:enabled="false"
                         android:paddingRight="@dimen/fifteen" />
 
