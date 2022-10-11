@@ -377,9 +377,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                 JSONObject vendorDetails = jsonObject.getJSONObject("vendorDetails");
                                 String mobile = vendorDetails.getString("mobile");
-                                String mobileVerified = vendorDetails.getString("mobileVerified");
+                                //String mobileVerified = vendorDetails.getString("mobileVerified");
                                 String emailID = vendorDetails.getString("emailID");
-                                String emailVerified = vendorDetails.getString("emailVerified");
+                                //String emailVerified = vendorDetails.getString("emailVerified");
                                 String name = vendorDetails.getString("name");
                                 String _id = vendorDetails.getString("_id");
 
@@ -395,7 +395,7 @@ public class LoginActivity extends AppCompatActivity {
                                 session.setUserName(name);
                                 session.setPhone(mobile);
                                 session.setEmail(emailID);
-                                session.setEmailVerifyStatus(emailVerified);
+                                //session.setEmailVerifyStatus(emailVerified);
                                 session.setAddress1(address);
                                 session.setState(state);
                                 session.setCity(city);

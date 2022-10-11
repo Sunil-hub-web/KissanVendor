@@ -259,12 +259,12 @@ public class MyAccountFragment extends Fragment {
 
                                 JSONObject vendorDetails = jsonObject.getJSONObject("vendorDetails");
                                 String mobile = vendorDetails.getString("mobile");
-                                String mobileVerified = vendorDetails.getString("mobileVerified");
+                                //String mobileVerified = vendorDetails.getString("mobileVerified");
                                 String emailID = vendorDetails.getString("emailID");
-                                String emailVerified = vendorDetails.getString("emailVerified");
+                                //String emailVerified = vendorDetails.getString("emailVerified");
                                 String name = vendorDetails.getString("name");
                                 String _id = vendorDetails.getString("_id");
-                                String shopname = vendorDetails.getString("shopname");
+                                String shopname = vendorDetails.getString("shopName");
                                 String gstNumber = vendorDetails.getString("gstNumber");
                                 String panNumber = vendorDetails.getString("panNumber");
 
@@ -285,7 +285,7 @@ public class MyAccountFragment extends Fragment {
                                 session.setUserName(name);
                                 session.setPhone(mobile);
                                 session.setEmail(emailID);
-                                session.setEmailVerifyStatus(emailVerified);
+                               // session.setEmailVerifyStatus(emailVerified);
                                 session.setAddress1(address);
                                 session.setState(state);
                                 session.setCity(city);
@@ -532,7 +532,7 @@ public class MyAccountFragment extends Fragment {
         Pattern pattern;
         Matcher matcher;
 
-        final String PASSWORD_PATTERN =  "^[A-Za-z]{4,}0[A-Z0-9]{6,}$";
+        final String PASSWORD_PATTERN =  "^[A-Za-z]{4,}0[0-9]{6,}$";
 
         pattern =  Pattern.compile (PASSWORD_PATTERN);
         matcher = pattern.matcher (ifsccode);

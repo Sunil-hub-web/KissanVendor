@@ -40,7 +40,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="@dimen/five"
-                    android:text="@string/some_id"
+                    android:text="0"
                     android:textAppearance="@style/walletprice_id" />
 
             </LinearLayout>
@@ -59,6 +59,59 @@
                 android:textAppearance="@style/add_money" />
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/ten"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="top"
+                android:text="Widthdraw Amount"
+                android:textAppearance="@style/product_nam" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:visibility="gone"
+                android:id="@+id/paymentinfo_lin">
+
+                <EditText
+                    android:id="@+id/totalpayment"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.3"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginTop="@dimen/four"
+                    android:layout_marginRight="@dimen/twenty"
+                    android:background="@drawable/rectangle_3"
+                    android:paddingLeft="@dimen/fifteen"
+                    android:paddingRight="@dimen/fifteen"
+                    android:enabled="false"/>
+
+                <TextView
+                    android:id="@+id/priceClc"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="@dimen/forty"
+                    android:background="@drawable/addnewprod_bg"
+                    android:elevation="@dimen/five"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="Payout"
+                    android:textSize="@dimen/thirteen"
+                    android:textAppearance="@style/continue_wi" />
+
+            </LinearLayout>
+        </LinearLayout>
+
 
       <!--  <RelativeLayout
             android:layout_width="match_parent"

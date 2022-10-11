@@ -117,7 +117,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                     SignUpUser();
                 }
-
             }
         });
 

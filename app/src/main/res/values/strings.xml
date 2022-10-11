@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Kissan Vendor</string>
     <string name="register_no">Register\nNow</string>
     <string name="i_already_h">I already have an account ? Log In</string>
@@ -131,5 +132,7 @@
     <string name="facebook_app_id">405061954884005</string>
     <string name="fb_login_protocol_scheme">fb405061954884005</string>
     <string name="facebook_client_token">48c41c160fd8d4f7618cebd116449d30</string>
+
+
 
 </resources>

@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -49,6 +52,9 @@ public class PaymentFragment extends Fragment {
     ArrayList<PaymentDetails> paymentDetails = new ArrayList<>();
     SessionManager session;
     ViewDialog progressbar;
+    TextView frame_23,priceClc;
+    EditText totalpayment;
+    LinearLayout paymentinfo_lin;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +63,18 @@ public class PaymentFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_payment, container, false);
 
         payment_recycler = v.findViewById(R.id.payment_recycler);
+        frame_23 = v.findViewById(R.id.frame_23);
+        priceClc = v.findViewById(R.id.priceClc);
+        totalpayment = v.findViewById(R.id.totalpayment);
+        paymentinfo_lin = v.findViewById(R.id.paymentinfo_lin);
+
+        frame_23.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                paymentinfo_lin.setVisibility(View.VISIBLE);
+            }
+        });
 
         session = new SessionManager(getActivity());
         progressbar = new ViewDialog(getActivity());
