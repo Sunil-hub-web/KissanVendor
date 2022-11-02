@@ -63,7 +63,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/paymentinfo_lin">
 
             <TextView
                 android:id="@+id/total"
@@ -79,9 +81,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:visibility="gone"
-                android:id="@+id/paymentinfo_lin">
+                android:weightSum="2">
 
                 <EditText
                     android:id="@+id/totalpayment"
@@ -93,8 +93,7 @@
                     android:layout_marginRight="@dimen/twenty"
                     android:background="@drawable/rectangle_3"
                     android:paddingLeft="@dimen/fifteen"
-                    android:paddingRight="@dimen/fifteen"
-                    android:enabled="false"/>
+                    android:paddingRight="@dimen/fifteen"/>
 
                 <TextView
                     android:id="@+id/priceClc"

@@ -48,9 +48,15 @@ public class PaymentDetailsAdapter extends RecyclerView.Adapter<PaymentDetailsAd
         holder.status.setText(payment.getStatues());
         holder.type.setText(payment.getType());
 
-        if(payment.getStatues().equals("Returned")){
+        if(payment.getStatues().equals("PENDING")){
 
             holder.status.setTextColor(ContextCompat.getColor(context, R.color.google_color));
+            holder.crAmount.setTextColor(ContextCompat.getColor(context, R.color.google_color));
+
+        }else{
+
+            holder.status.setTextColor(ContextCompat.getColor(context, R.color.btn_color));
+            holder.crAmount.setTextColor(ContextCompat.getColor(context, R.color.btn_color));
         }
 
     }

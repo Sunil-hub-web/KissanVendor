@@ -1691,6 +1691,9 @@ public class AddNewProduct extends AppCompatActivity {
                     String msg = jsonObject.getString("msg");
                     String data = jsonObject.getString("data");
 
+                    commission.setText("0");
+                    gst.setText("0");
+
                     if (code.equals("200")) {
 
                         if (data.equals("null")) {

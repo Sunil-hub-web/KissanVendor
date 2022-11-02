@@ -52,7 +52,7 @@ public class PaymentFragment extends Fragment {
     ArrayList<PaymentDetails> paymentDetails = new ArrayList<>();
     SessionManager session;
     ViewDialog progressbar;
-    TextView frame_23,priceClc;
+    TextView frame_23,priceClc,some_id;
     EditText totalpayment;
     LinearLayout paymentinfo_lin;
 
@@ -67,33 +67,43 @@ public class PaymentFragment extends Fragment {
         priceClc = v.findViewById(R.id.priceClc);
         totalpayment = v.findViewById(R.id.totalpayment);
         paymentinfo_lin = v.findViewById(R.id.paymentinfo_lin);
+        some_id = v.findViewById(R.id.some_id);
 
         frame_23.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 paymentinfo_lin.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        priceClc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(totalpayment.getText().toString().trim().equals("")){
+
+                    Toast.makeText(getActivity(), "Please give The widthdraw amount", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    String amount = totalpayment.getText().toString().trim();
+                    int in_amount = Integer.parseInt(amount);
+
+                    payoutRequest(in_amount);
+                }
             }
         });
 
         session = new SessionManager(getActivity());
         progressbar = new ViewDialog(getActivity());
 
-        paymentDetails.add(new PaymentDetails("123456789654","Apple","Delivered","Rs 250","Refundable","12 sep 22"));
-        paymentDetails.add(new PaymentDetails("123456789654","Apple","Returned","Rs 630","Refundable","13 sep 22"));
-        paymentDetails.add(new PaymentDetails("123456789654","Apple","Delivered","Rs 500","Refundable","14 sep 22"));
-        paymentDetails.add(new PaymentDetails("123456789654","Apple","Returned","Rs 810","Refundable","15 sep 22"));
-
-        linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
-        paymentDetailsAdapter = new PaymentDetailsAdapter(paymentDetails,getActivity());
-        payment_recycler.setLayoutManager(linearLayoutManager);
-        payment_recycler.setHasFixedSize(true);
-        payment_recycler.setAdapter(paymentDetailsAdapter);
-
+        transaction();
+        
         return v;
     }
 
-    public void payoutRequest(long amount){
+    public void payoutRequest(int amount){
 
         progressbar.showDialog();
 
@@ -211,7 +221,54 @@ public class PaymentFragment extends Fragment {
 
                         JSONArray jsonArray_payouts = new JSONArray(payouts);
                         JSONArray jsonArray_deposits = new JSONArray(deposits);
+                        JSONObject jsonObject_vendor = new JSONObject(vendor);
 
+                        String wallet = jsonObject_vendor.getString("wallet");
+
+                        JSONObject jsonObject_wallet = new JSONObject(wallet);
+
+                        String balance = jsonObject_wallet.getString("balance");
+                        String lockedBalance = jsonObject_wallet.getString("lockedBalance");
+                        //String name = jsonObject_vendor.getString("name");
+
+                        some_id.setText(balance);
+
+                        if(jsonArray_payouts.length() != 0){
+
+                            for(int i=0;i<jsonArray_payouts.length();i++){
+
+                                JSONObject jsonObject_payouts = jsonArray_payouts.getJSONObject(i);
+
+                                String status = jsonObject_payouts.getString("status");
+                                String razorpayPayoutId = jsonObject_payouts.getString("razorpayPayoutId");
+                                String razorpayUtr = jsonObject_payouts.getString("razorpayUtr");
+                                String _id = jsonObject_payouts.getString("_id");
+                                String vendorId = jsonObject_payouts.getString("vendorId");
+                                String amount = jsonObject_payouts.getString("amount");
+                                String createdAt = jsonObject_payouts.getString("createdAt");
+                                String updatedAt = jsonObject_payouts.getString("updatedAt");
+
+                                PaymentDetails paymentDetails1 = new PaymentDetails(
+                                        _id,"",status,amount,"",createdAt
+                                );
+
+                                paymentDetails.add(paymentDetails1);
+                            }
+
+                            linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+                            paymentDetailsAdapter = new PaymentDetailsAdapter(paymentDetails,getActivity());
+                            payment_recycler.setLayoutManager(linearLayoutManager);
+                            payment_recycler.setHasFixedSize(true);
+                            payment_recycler.setAdapter(paymentDetailsAdapter);
+                            
+                        }else{
+
+                            Toast.makeText(getActivity(), "Transaction Not Avilable", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else{
+
+                        Toast.makeText(getActivity(), "Data Is Not Avilable", Toast.LENGTH_SHORT).show();
                     }
 
 

@@ -375,7 +375,7 @@ public class MyAccountFragment extends Fragment {
             }
         };
         stringRequest.setRetryPolicy(new
-                DefaultRetryPolicy(50000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                DefaultRetryPolicy(50000, 1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
